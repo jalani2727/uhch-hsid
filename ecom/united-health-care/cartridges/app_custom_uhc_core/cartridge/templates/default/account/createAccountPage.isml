@@ -25,7 +25,7 @@
                     <img class="" src="${URLUtils.staticURL('/images/logo.svg')}"
                         alt="${Resource.msg('global.storename', 'common', null)}" />
                     <h1 class="hero-title mb-3 mt-3">${Resource.msg('login.header-h1', 'login', null)}</h1>
-                    <p class="hero-description">${Resource.msg('login.subheader-1', 'login', null)}</p>
+                    <p class="hero-description text-highlight">${Resource.msg('login.subheader-1', 'login', null)}</p>
                     <p>${Resource.msg('login.subheader-2', 'login', null)}</p>
 
                 </div>

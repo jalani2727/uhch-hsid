@@ -1,5 +1,28 @@
 .create-account-page {
     // max-width: 624px;
+    .text-highlight {
+        font-weight: 800;
+        font-style: italic;
+        color: $uhc-black;
+    }
+    &.uhc-core{
+
+    }
+
+    &.aarp-hearing{
+
+    }
+    &.epic-hearing{
+        .text-content {
+            img {
+                width: 50%;
+                @include media-breakpoint-down(sm) {
+                    display: flex;
+                    margin: auto;
+                }
+            }
+        }
+    }
 
     .custom-form-control-label {
         font-size: 14px;
@@ -189,11 +212,12 @@
         max-width: 530px;
     }
 
-    padding: 36px 36px 42px;
+    padding: 20px 20px 16px;
     background-color: #fff;
 }
 
 .sign-up-form {
+    padding: 0;
     @include media-breakpoint-up(sm){
         position: absolute;
         top: 35px;

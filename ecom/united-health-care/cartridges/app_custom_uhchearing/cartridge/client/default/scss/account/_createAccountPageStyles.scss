@@ -1,5 +1,5 @@
 .create-account-page {
-    max-width: 624px;
+    // max-width: 624px;
 
     .custom-form-control-label {
         font-size: 14px;
@@ -140,5 +140,64 @@
 
     .btn-create-account:not(:disabled) {
         border: 2px solid transparent;
+    }
+}
+
+
+// 7/20/2023 - Style Updates - RE:Figma v6, UHC Hearing Desktop vFC
+
+// .background-image {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     background-image: url('../../../../static/default/images/uhc_hearing-signup.png');
+//     background-size: cover;
+//     background-position: center;
+//     opacity: 0.8; /* You can adjust the opacity if needed */
+//     z-index: -1;
+// }
+
+
+.card {
+    padding: 18px 20px;
+}
+.image-container {
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
+.hero-container {
+    display: flex;
+    justify-content: space-between;
+
+    h1.hero-title {
+        color: #002677;
+    }
+}
+
+.text-content {
+    @include media-breakpoint-up(sm){
+        position: absolute;
+        top: 35px;
+        left: 5%;
+        max-width: 530px;
+    }
+
+    padding: 36px 36px 42px;
+    background-color: #fff;
+}
+
+.sign-up-form {
+    @include media-breakpoint-up(sm){
+        position: absolute;
+        top: 35px;
+        right: 10%;
+        max-width: 530px;
     }
 }

@@ -164,8 +164,11 @@
 
                                 <iscomment> Create Account Btn </iscomment>
                                 <div class="btn-container-create-account mx-auto mb-4 mt-0 pb-3 pt-0">
-                                    <button class="btn btn-primary w-100 btn-create-account disabled" type="submit"
-                                        name="submit" value="submit">
+                                    <button class="btn btn-primary w-100 btn-create-account disabled custom-datalayer" type="submit"
+                                    name="submit" 
+                                    value="submit"
+                                    data-name="${Resource.msg('label.adobe.create-account.submit', 'createaccount', null)}" 
+                                    data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}">
                                         ${Resource.msg('label.btn.create-account', 'createaccount', null)}
                                     </button>
                                 </div>

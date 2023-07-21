@@ -108,6 +108,12 @@
                                     </div>
                                 </div>
 
+                                 <iscomment> Form title 1 </iscomment>
+                                <h1 class="card-title-2 uhc-sub-title uhc-blue mt-4 pt-2">
+                                    ${Resource.msg('form.title.second', 'createaccount', null)}
+                                </h1>
+                                <p>${Resource.msg('login.subheader-4', 'login', null)}</p>
+
                                 <iscomment> Health Plan Name </iscomment>
                                 <div class="form-group required mb-0">
                                     <label for="health-plan-name"

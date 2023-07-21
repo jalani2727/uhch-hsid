@@ -112,6 +112,7 @@
                                 <h1 class="card-title-2 uhc-sub-title uhc-blue mt-4 pt-2">
                                     ${Resource.msg('form.title.second', 'createaccount', null)}
                                 </h1>
+                                <p>${Resource.msg('login.subheader-4-save', 'login', null)}</p>
 
                                 <iscomment> Form description 2 </iscomment>
                                 <div class="my-4">
@@ -122,7 +123,14 @@
                                 <iscomment> AARP Membership Number </iscomment>
                                 <div class="form-group mt-4 mb-0 aarp-membership-number-container">
                                     <label for="aarp-membership-number"
-                                        class="custom-form-label uhc-sans-600">${Resource.msg('form.input.label.membership-number', 'createaccount', null)}</label>
+                                        class="custom-form-label uhc-sans-600">${Resource.msg('form.input.label.membership-number', 'createaccount', null)}
+                                        <div class="member-id-info-card">
+                                            <div class="member-id-info-card-icon"></div>
+                                            <div class="member-id-info-card-img">
+                                                <iscontentasset aid="healthplan-memberid-info-tooltip" />
+                                            </div>
+                                        </div>
+                                        </label>
                                     <input type="text" class="form-control" id="aarp-membership-number" name="memberId">
                                     <div class="my-4">
                                         <iscontentasset aid="aarp-join-or-renew" />

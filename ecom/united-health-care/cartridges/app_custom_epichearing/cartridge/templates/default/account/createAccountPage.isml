@@ -27,6 +27,7 @@
                     <h1 class="uhc-blue mb-3 mt-3">${Resource.msg('login.header-h1', 'login', null)}</h1>
                     <p class="hero-description text-highlight">${Resource.msg('login.subheader-1', 'login', null)}</p>
                     <p>${Resource.msg('login.subheader-2', 'login', null)}</p>
+                    <p>${Resource.msg('login.subheader-3', 'login', null)}</p>
 
                 </div>
                 <iscomment> Right-side </iscomment>
@@ -37,6 +38,16 @@
                             <form action="${pdict.actionURL}" class="create-account-form" method="POST"
                                 name="create-account-form" enctype="multipart/form-data">
 
+                                <iscomment> Form title 1 </iscomment>
+                                <h1 class="card-title-1 uhc-sub-title uhc-blue">
+                                    ${Resource.msg('form.title.first-epic', 'createaccount', null)}
+                                </h1>
+
+                                <iscomment> Form description 1 </iscomment>
+                                <div class="form-description-1 my-lg-4">
+                                    <iscontentasset aid="create-account-user-details-form-desc" />
+                                </div>
+                                
                                 <iscomment> User's first name </iscomment>
                                 <div class="col px-0">
                                     <div class="form-group required">
@@ -107,48 +118,6 @@
                                     </div>
                                 </div>
 
-                                <iscomment> Health Plan Name </iscomment>
-                                <div class="form-group required mb-0">
-                                    <label for="health-plan-name"
-                                        class="custom-form-control-label required uhc-sans-600">
-                                        ${Resource.msg('form.input.label.health-plan-name', 'createaccount', null)}
-                                    </label>
-                                    <select type="text" class="form-control custom-select custom-form-control-label"
-                                        name="healthPlanName" id="health-plan-name">
-                                        <option
-                                            value="${Resource.msg('form.input.options.value.epichearing', 'createaccount', null)}">
-                                            ${Resource.msg('form.input.options.label.epichearing', 'createaccount', null)}</option>
-                                        <option
-                                            value="${Resource.msg('form.input.options.value.other', 'createaccount', null)}">
-                                            ${Resource.msg('form.input.options.label.other', 'createaccount', null)}
-                                        </option>
-                                    </select>
-                                    <div class="invalid-feedback" id="health-plan-name-error"></div>
-                                </div>
-
-                                <iscomment> Other Health Plan Name </iscomment>
-                                <div class="form-group mt-4 mb-0 d-none other-health-plan-value-container">
-                                    <label for="other-health-plan"
-                                        class="custom-form-control-label required uhc-sans-600">${Resource.msg('form.input.options.label.other', 'createaccount', null)}</label>
-                                    <input type="text" class="form-control" id="other-health-plan"
-                                        name="otherHealthPlan">
-                                    <div class="invalid-feedback" id="other-health-plan-name-error"></div>
-                                </div>
-
-                                <iscomment> Member Id </iscomment>
-                                <div class="form-group required mt-4 mb-0">
-                                    <label for="member-id" class="custom-form-control-label required uhc-sans-600">
-                                        ${Resource.msg('form.input.label.member-id', 'createaccount', null)}
-                                        <div class="member-id-info-card">
-                                            <div class="member-id-info-card-icon"></div>
-                                            <div class="member-id-info-card-img">
-                                                <iscontentasset aid="healthplan-memberid-info-tooltip" />
-                                            </div>
-                                        </div>
-                                    </label>
-                                    <input type="text" required class="form-control" id="member-id" name="memberId">
-                                    <div class="invalid-feedback" id="member-id-error"></div>
-                                </div>
 
                                 <iscomment> Create Account Btn </iscomment>
                                 <div class="btn-container-create-account mx-auto my-4 py-3">

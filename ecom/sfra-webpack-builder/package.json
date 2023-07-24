@@ -36,9 +36,7 @@
     "fs-extra": "10.0.0",
     "mini-css-extract-plugin": "2.4.4",
     "minimist": "1.2.6",
-
     "node-sass": "7.0.0",
-
     "postcss-loader": "6.2.0",
     "sass-loader": "12.3.0",
     "stylelint": "14.0.1",

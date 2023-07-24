@@ -5,124 +5,162 @@
         assets.addJs('/js/createAccount.js');
         assets.addCss('/css/createAccountPage.css');
     </isscript>
-    <div class="container create-account-page mb-lg-5 mb-4" data-health-plan-other="${Resource.msg('form.input.options.value.other','createaccount',null)}" data-max-dob-allowed-error-msg="${Resource.msg('error.message.invalid-dob','createaccount',null)}" data-future-dob-error-msg="${Resource.msg('error.message.future-dob','createaccount',null)}">
-        <div class="justify-content-center">
-            <div class="card mt-lg-5 mt-0">
-                <div class="card-body pt-0">
-                    <div class="api-error-message"> </div>
-                    <form action="${pdict.actionURL}" class="create-account-form" method="POST" name="create-account-form" enctype="multipart/form-data">
-                        <iscomment> Form title 1 </iscomment>
-                        <h1 class="card-title-1 uhc-sub-title uhc-blue">
-                            ${Resource.msg('form.title.first', 'createaccount', null)}
-                        </h1>
+    <div class="create-account-page aarp-hearing"
+        data-health-plan-other="${Resource.msg('form.input.options.value.other', 'createaccount', null)}"
+        data-max-dob-allowed-error-msg="${Resource.msg('error.message.invalid-dob', 'createaccount', null)}"
+        data-future-dob-error-msg="${Resource.msg('error.message.future-dob', 'createaccount', null)}">
 
-                        <iscomment> Form description 1 </iscomment>
-                        <div class="form-description-1 my-lg-4">
-                            <iscontentasset aid="create-account-user-details-form-desc" />
-                        </div>
+        <iscomment> Background </iscomment>
+        <div class="image-container hidden-sm-down">
+            <picture>
+                <img src="${URLUtils.staticURL('/images/aarp_hearing-signup-2.png')}" alt="Background Image"
+                    class="img-fluid" />
+            </picture>
+        </div>
 
-                        <iscomment> User's first name </iscomment>
-                        <div class="col px-0">
-                            <div class="form-group required">
-                                <label class="custom-form-control-label uhc-sans-600" for="user-first-name">
-                                    ${Resource.msg('form.input.label.firstname', 'createaccount', null)}
-                                </label>
-                                <input type="text" required class="form-control required" id="user-first-name" name="userFirstName"
-                                data-value-missing-error="${Resource.msg('error.message.first-name-missing', 'createaccount', null)}">
-                                <div class="invalid-feedback" id="user-first-name-error"></div>
-                            </div>
-                        </div>
+        <div class="container hero-container">
+            <div class="row">
+                <iscomment> Left Side </iscomment>
+                <div class="text-content col-12">
+                    <img class="" src="${URLUtils.staticURL('/images/logo.svg')}"
+                        alt="${Resource.msg('global.storename', 'common', null)}" />
+                    <h1 class="hero-title mb-3 mt-3">${Resource.msg('login.header-h1', 'login', null)}</h1>
+                    <p class="hero-description text-highlight">${Resource.msg('login.subheader-1', 'login', null)}</p>
+                    <p>${Resource.msg('login.subheader-2', 'login', null)}</p>
+                    <p>${Resource.msg('login.subheader-3', 'login', null)}</p>
 
-                        <iscomment> User's  last name </iscomment>
-                        <div class="col px-0">
-                            <div class="form-group required">
-                                <label class="custom-form-control-label uhc-sans-600" for="user-last-name">
-                                    ${Resource.msg('form.input.label.lastname', 'createaccount', null)}
-                                </label>
-                                <input type="text" required class="form-control required" id="user-last-name" name="userLastName"
-                                data-value-missing-error="${Resource.msg('error.message.last-name-missing', 'createaccount', null)}">
-                                <div class="invalid-feedback" id="user-last-name-error"></div>
-                            </div>
-                        </div>
-
-                        <iscomment> User's Phone </iscomment>
-                        <div class="col px-0">
-                            <div class="form-group required user-phone-container">
-                                <label class="custom-form-control-label uhc-sans-600" for="user-phone">
-                                    ${Resource.msg('form.input.label.phone', 'createaccount', null)}
-                                </label>
-                                <input type="text"
-                                    placeholder="${Resource.msg('label.form.field.phone.placeholder', 'forms', null)}"
-                                    required class="form-control required input-phone" id="user-phone"
-                                    maxlength="12" pattern="(^\d{3}-\d{3}-\d{4}$)"
-                                    data-pattern-mismatch="${Resource.msg('error.message.invalid-phone', 'createaccount', null)}"
-                                    name="userPhone">
-                                <div class="invalid-feedback" id="user-phone-error"></div>
-                            </div>
-                        </div>
-
-                        <iscomment> User's  DOB </iscomment>
-                        <div class="col px-0">
-                            <div class="form-group required">
-                                <label class="custom-form-control-label uhc-sans-600" for="user-dob">
-                                    ${Resource.msg('form.input.label.dob', 'createaccount', null)}
-                                </label>
-                                <input type="date" required class="form-control required" id="user-dob"
-                                    name="userDob"
-                                    data-range-error="${Resource.msg('error.message.invalid-dob','forms',null)}">
-                                <div class="invalid-input" id="user-dob-error"></div>
-                                <div class="invalid-feedback" id="user-dob-error"></div>
-                            </div>
-                        </div>
-
-                        <iscomment> ZipCode </iscomment>
-                        <div class="col px-0">
-                            <div class="form-group required">
-                                <label class="custom-form-control-label uhc-sans-600" for="user-zipcode">
-                                    ${Resource.msg('form.input.label.zip', 'createaccount', null)}
-                                </label>
-                                <input type="text" required class="form-control required" id="user-zipcode"
-                                    name="userZipCode" maxlength="10" minlength="5"
-                                    pattern="(^\d{5}(-\d{4})?$)|(^[abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$)" 
-                                    data-pattern-mismatch="${Resource.msg('error.message.invalid-zipcode', 'createaccount', null)}">
-                                <div class="invalid-feedback" id="user-zipcode-error"></div>
-                            </div>
-                        </div>
-
-                        <iscomment> Form title 2 </iscomment>
-                        <h1 class="card-title-2 uhc-sub-title uhc-blue mt-4 pt-2">
-                            ${Resource.msg('form.title.second', 'createaccount', null)}
-                        </h1>
-
-                        <iscomment> Form description 2 </iscomment>
-                        <div class="my-4">
-                            <iscontentasset aid="create-account-aarp-membership-form-desc" />
-                        </div>
-
-
-                        <iscomment> AARP Membership Number </iscomment>
-                        <div class="form-group mt-4 mb-0 aarp-membership-number-container">
-                            <label for="aarp-membership-number" class="custom-form-label uhc-sans-600">${Resource.msg('form.input.label.membership-number', 'createaccount', null)}</label>
-                            <input type="text" class="form-control" id="aarp-membership-number" name="memberId">
-                            <div class="my-4">
-                                <iscontentasset aid="aarp-join-or-renew" />
-                            </div>
-                        </div>
-
-                        <iscomment> Create Account Btn </iscomment>
-                        <div class="btn-container-create-account mx-auto mb-4 mt-0 pb-3 pt-0">
-                            <button class="btn btn-primary w-100 btn-create-account disabled" type="submit" name="submit" value="submit">
-                                ${Resource.msg('label.btn.create-account', 'createaccount', null)}
-                            </button>
-                        </div>
-
-                         <iscomment> User's consent </iscomment>
-                        <div class="user-consent-container">
-                            <iscontentasset aid="create-account-consent" />
-                        </div>
-                    </form>
                 </div>
+                <iscomment> Right-side </iscomment>
+                <div class="sign-up-form col-12">
+                    <div class="card">
+                        <div class="card-body pt-0">
+                            <div class="api-error-message"> </div>
+                            <form action="${pdict.actionURL}" class="create-account-form" method="POST"
+                                name="create-account-form" enctype="multipart/form-data">
+
+                                <iscomment> User's first name </iscomment>
+                                <div class="col px-0">
+                                    <div class="form-group required">
+                                        <label class="custom-form-control-label uhc-sans-600" for="user-first-name">
+                                            ${Resource.msg('form.input.label.firstname', 'createaccount', null)}
+                                        </label>
+                                        <input type="text" required class="form-control required" id="user-first-name"
+                                            name="userFirstName"
+                                            data-value-missing-error="${Resource.msg('error.message.first-name-missing', 'createaccount', null)}">
+                                        <div class="invalid-feedback" id="user-first-name-error"></div>
+                                    </div>
+                                </div>
+
+                                <iscomment> User's last name </iscomment>
+                                <div class="col px-0">
+                                    <div class="form-group required">
+                                        <label class="custom-form-control-label uhc-sans-600" for="user-last-name">
+                                            ${Resource.msg('form.input.label.lastname', 'createaccount', null)}
+                                        </label>
+                                        <input type="text" required class="form-control required" id="user-last-name"
+                                            name="userLastName"
+                                            data-value-missing-error="${Resource.msg('error.message.last-name-missing', 'createaccount', null)}">
+                                        <div class="invalid-feedback" id="user-last-name-error"></div>
+                                    </div>
+                                </div>
+
+                                <iscomment> User's Phone </iscomment>
+                                <div class="col px-0">
+                                    <div class="form-group required user-phone-container">
+                                        <label class="custom-form-control-label uhc-sans-600" for="user-phone">
+                                            ${Resource.msg('form.input.label.phone', 'createaccount', null)}
+                                        </label>
+                                        <input type="text"
+                                            placeholder="${Resource.msg('label.form.field.phone.placeholder', 'forms', null)}"
+                                            required class="form-control required input-phone" id="user-phone"
+                                            maxlength="12" pattern="(^\d{3}-\d{3}-\d{4}$)"
+                                            data-pattern-mismatch="${Resource.msg('error.message.invalid-phone', 'createaccount', null)}"
+                                            name="userPhone">
+                                        <div class="invalid-feedback" id="user-phone-error"></div>
+                                    </div>
+                                </div>
+
+                                <iscomment> User's DOB </iscomment>
+                                <div class="col px-0">
+                                    <div class="form-group required">
+                                        <label class="custom-form-control-label uhc-sans-600" for="user-dob">
+                                            ${Resource.msg('form.input.label.dob', 'createaccount', null)}
+                                        </label>
+                                        <input type="date" required class="form-control required" id="user-dob"
+                                            name="userDob"
+                                            data-range-error="${Resource.msg('error.message.invalid-dob', 'forms', null)}">
+                                        <div class="invalid-input" id="user-dob-error"></div>
+                                        <div class="invalid-feedback" id="user-dob-error"></div>
+                                    </div>
+                                </div>
+
+                                <iscomment> ZipCode </iscomment>
+                                <div class="col px-0">
+                                    <div class="form-group required">
+                                        <label class="custom-form-control-label uhc-sans-600" for="user-zipcode">
+                                            ${Resource.msg('form.input.label.zip', 'createaccount', null)}
+                                        </label>
+                                        <input type="text" required class="form-control required" id="user-zipcode"
+                                            name="userZipCode" maxlength="10" minlength="5"
+                                            pattern="(^\d{5}(-\d{4})?$)|(^[abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$)"
+                                            data-pattern-mismatch="${Resource.msg('error.message.invalid-zipcode', 'createaccount', null)}">
+                                        <div class="invalid-feedback" id="user-zipcode-error"></div>
+                                    </div>
+                                </div>
+
+                                <iscomment> Form title 2 </iscomment>
+                                <h1 class="card-title-2 uhc-sub-title uhc-blue mt-4 pt-2">
+                                    ${Resource.msg('form.title.second', 'createaccount', null)}
+                                </h1>
+                                <p>${Resource.msg('login.subheader-4-save', 'login', null)}</p>
+
+                                <iscomment> Form description 2 </iscomment>
+                                <div class="my-4">
+                                    <iscontentasset aid="create-account-aarp-membership-form-desc" />
+                                </div>
+
+
+                                <iscomment> AARP Membership Number </iscomment>
+                                <div class="form-group mt-4 mb-0 aarp-membership-number-container">
+                                    <label for="aarp-membership-number"
+                                        class="custom-form-label uhc-sans-600">${Resource.msg('form.input.label.membership-number', 'createaccount', null)}
+                                        <div class="member-id-info-card">
+                                            <div class="member-id-info-card-icon"></div>
+                                            <div class="member-id-info-card-img">
+                                                <iscontentasset aid="healthplan-memberid-info-tooltip" />
+                                            </div>
+                                        </div>
+                                        </label>
+                                    <input type="text" class="form-control" id="aarp-membership-number" name="memberId">
+                                    <div class="my-4">
+                                        <iscontentasset aid="aarp-join-or-renew" />
+                                    </div>
+                                </div>
+
+                                <iscomment> Create Account Btn </iscomment>
+                                <div class="btn-container-create-account mx-auto mb-4 mt-0 pb-3 pt-0">
+                                    <button class="btn btn-primary w-100 btn-create-account disabled custom-datalayer" type="submit"
+                                    name="submit" 
+                                    value="submit"
+                                    data-name="${Resource.msg('label.adobe.create-account.submit', 'createaccount', null)}" 
+                                    data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}">
+                                        ${Resource.msg('label.btn.create-account', 'createaccount', null)}
+                                    </button>
+                                </div>
+
+                                <iscomment> User's consent </iscomment>
+                                <div class="user-consent-container">
+                                    <iscontentasset aid="create-account-consent" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
+
+
         </div>
     </div>
 </isdecorate>

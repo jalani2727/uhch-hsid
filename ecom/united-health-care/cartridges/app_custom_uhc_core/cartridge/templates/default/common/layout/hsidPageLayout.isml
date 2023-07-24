@@ -10,7 +10,7 @@
     </head>
 
     <body>
-        <isinclude template="/components/header/logoOnlyPageHeader" />
+        <iscomment> <isinclude template="/components/header/logoOnlyPageHeader" /> </iscomment>
         <div role="main" id="maincontent">
             <isreplace/>
         </div>

@@ -206,7 +206,8 @@
 }
 
 .text-content {
-    @include media-breakpoint-up(sm){
+    // consider :  @media (min-width: 1024px){} for tablets and small screens
+    @include media-breakpoint-up(lg){
         position: absolute;
         top: 35px;
         left: 5%;
@@ -219,7 +220,8 @@
 
 .sign-up-form {
     padding: 0;
-    @include media-breakpoint-up(sm){
+    // consider :  @media (min-width: 1024px){} for tablets and small screens
+    @include media-breakpoint-up(lg){
         position: absolute;
         top: 35px;
         right: 10%;

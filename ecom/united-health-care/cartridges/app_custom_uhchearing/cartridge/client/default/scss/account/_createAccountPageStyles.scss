@@ -5,14 +5,8 @@
         font-style: italic;
         color: $uhc-black;
     }
-    &.uhc-core{
 
-    }
-
-    &.aarp-hearing{
-
-    }
-    &.epic-hearing{
+    &.epic-hearing {
         .text-content {
             img {
                 width: 50%;
@@ -167,7 +161,6 @@
     }
 }
 
-
 // 7/20/2023 - Style Updates - RE:Figma v6, UHC Hearing Desktop vFC
 
 // .background-image {
@@ -183,18 +176,15 @@
 //     z-index: -1;
 // }
 
-
 .card {
     padding: 18px 20px;
 }
 .image-container {
-
     img {
         width: 100%;
         height: 100%;
     }
 }
-
 
 .hero-container {
     display: flex;

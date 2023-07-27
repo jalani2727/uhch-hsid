@@ -18,16 +18,16 @@ module.exports = (function ($) {
 
     // Core Zoom Logic, independent of event listeners.
     $.zoom = function (target, source, img, magnify) {
-        var targetHeight,
-            targetWidth,
-            sourceHeight,
-            sourceWidth,
-            xRatio,
-            yRatio,
-            offset,
-            $target = $(target),
-            position = $target.css('position'),
-            $source = $(source);
+        var targetHeight;
+        var targetWidth;
+        var sourceHeight;
+        var sourceWidth;
+        var xRatio;
+        var yRatio;
+        var offset;
+        var $target = $(target);
+        var position = $target.css('position');
+        var $source = $(source);
 
         // The parent element needs positioning so that the zoomed element can be correctly positioned within.
         target.style.position = /(absolute|fixed)/.test(position) ? position : 'relative';
@@ -68,8 +68,8 @@ module.exports = (function ($) {
                 offset = $source.offset();
             },
             move: function (e) {
-                var left = (e.pageX - offset.left),
-                    top = (e.pageY - offset.top);
+                var left = (e.pageX - offset.left);
+                var top = (e.pageY - offset.top);
 
                 top = Math.max(Math.min(top, sourceHeight), 0);
                 left = Math.max(Math.min(left, sourceWidth), 0);
@@ -81,19 +81,19 @@ module.exports = (function ($) {
     };
 
     $.fn.zoom = function (options) {
-        return this.each (function() {
+        return this.each(function () {
             var
-                settings = $.extend({}, defaults, options || {}),
+                settings = $.extend({}, defaults, options || {});
                 // target will display the zoomed image
-                target = settings.target && $(settings.target)[0] || this,
-                // source will provide zoom location info (thumbnail)
-                source = this,
-                $source = $(source),
-                img = document.createElement('img'),
-                $img = $(img),
-                mousemove = 'mousemove.zoom',
-                clicked = false,
-                touched = false;
+            var target = settings.target && $(settings.target)[0] || this;
+            // source will provide zoom location info (thumbnail)
+            var source = this;
+            var $source = $(source);
+            var img = document.createElement('img');
+            var $img = $(img);
+            var mousemove = 'mousemove.zoom';
+            var clicked = false;
+            var touched = false;
 
             // If a url wasn't specified, look for an image element.
             if (!settings.url) {

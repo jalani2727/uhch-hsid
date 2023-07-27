@@ -10,7 +10,7 @@
         .text-content {
             img {
                 width: 50%;
-                @include media-breakpoint-down(sm) {
+                @include media-breakpoint-down(md) {
                     display: flex;
                     margin: auto;
                 }
@@ -180,6 +180,29 @@
     }
 }
 
+.uhc-core {
+
+    @media (min-width: 1280px) and (max-width: 1440px) {
+        form p {
+            font-size: 12px;
+        }
+    }
+
+    @include media-breakpoint-up(xl) {
+        .form-group {
+            margin:0
+        }
+
+        .user-consent-container label.custom-control-label {
+            font-size: 12px;
+        }
+
+        input.form-control, select.form-control {
+            height: 30px;
+        }
+    }
+}
+
 .text-content {
     // consider :  @media (min-width: 1024px){} for tablets and small screens
     @include media-breakpoint-up(lg){
@@ -202,4 +225,23 @@
         right: 10%;
         max-width: 530px;
     }
+
+    @media (min-width: 1280px) and (max-width: 1440px) {
+        .card-title-2, h1 {
+            margin: 0 !important;
+        }
+
+        .form-group {
+            margin: 1px 0 0 0;
+        }
+
+        .form-description-1, .user-consent-container label.custom-control-label {
+            font-size: 12px;
+        }
+
+        input.form-control, select.form-control {
+            height: 30px;
+        }
+    }
 }
+

@@ -1,3 +1,8 @@
+// ----- variables
+$desktop-small: 1280px;
+$desktop: 1440px;
+
+// ----- create account page styles
 .create-account-page {
     // max-width: 624px;
     .text-highlight {
@@ -183,7 +188,7 @@
 
 .uhc-core {
 
-    @media (min-width: 1280px) and (max-width: 1440px) {
+    @media (min-width: $desktop-small) and (max-width: $desktop) {
         form p {
             font-size: 12px;
         }
@@ -191,14 +196,15 @@
 
     @include media-breakpoint-up(xl) {
         .form-group {
-            margin:0
+            margin: 0;
         }
 
         .user-consent-container label.custom-control-label {
             font-size: 12px;
         }
 
-        input.form-control, select.form-control {
+        input.form-control,
+        select.form-control {
             height: 30px;
         }
     }
@@ -227,20 +233,23 @@
         max-width: 530px;
     }
 
-    @media (min-width: 1280px) and (max-width: 1440px) {
-        .card-title-2, h1 {
+    @media (min-width: $desktop-small) and (max-width: $desktop) {
+        .card-title-2,
+        h1 {
             margin: 0 !important;
         }
 
         .form-group {
-            margin: 1px 0 0 0;
+            margin: 1px 0 0;
         }
 
-        .form-description-1, .user-consent-container label.custom-control-label {
+        .form-description-1,
+        .user-consent-container label.custom-control-label {
             font-size: 12px;
         }
 
-        input.form-control, select.form-control {
+        input.form-control,
+        select.form-control {
             height: 30px;
         }
     }

@@ -112,10 +112,9 @@
                                 <h1 class="card-title-2 uhc-sub-title uhc-blue mt-4 pt-2">
                                     ${Resource.msg('form.title.second', 'createaccount', null)}
                                 </h1>
-                                <p>${Resource.msg('login.subheader-4-save', 'login', null)}</p>
 
                                 <iscomment> Form description 2 </iscomment>
-                                <div class="my-4">
+                                <div class="membership-form-desc">
                                     <iscontentasset aid="create-account-aarp-membership-form-desc" />
                                 </div>
 

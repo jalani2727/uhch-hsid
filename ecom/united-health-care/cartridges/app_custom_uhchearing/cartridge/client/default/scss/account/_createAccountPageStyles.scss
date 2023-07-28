@@ -192,6 +192,17 @@ $desktop: 1440px;
         form p {
             font-size: 12px;
         }
+        .sign-up-form label.custom-control-label {
+            font-size: 12px;
+        }
+    }
+    @media (min-width: 1440px) and (max-width: 1667px) {
+        form p {
+            font-size: 12px;
+        }
+        .sign-up-form label.custom-control-label {
+            font-size: 12px;
+        }
     }
 
     @include media-breakpoint-up(xl) {
@@ -199,9 +210,9 @@ $desktop: 1440px;
             margin: 0;
         }
 
-        .user-consent-container label.custom-control-label {
-            font-size: 12px;
-        }
+        // .sign-up-form label.custom-control-label {
+        //     font-size: 12px;
+        // }
 
         input.form-control,
         select.form-control {

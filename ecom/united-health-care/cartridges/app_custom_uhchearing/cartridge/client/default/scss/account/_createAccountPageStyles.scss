@@ -177,8 +177,17 @@ $desktop-large: 1667px;
 
 .image-container {
     img {
-        width: 100%;
-        height: 100%;
+        width: auto;
+        height: 100vh;
+        min-width: 100%;
+
+        @media (min-width: 1932px) {
+            width: 100%;
+            height: 100%;
+        }
+
+        max-width: none;
+        text-align: center;
     }
 }
 
@@ -188,44 +197,6 @@ $desktop-large: 1667px;
 
     h1.hero-title {
         color: #002677;
-    }
-}
-
-.uhc-core {
-
-    @media (min-width: $desktop-small) and (max-width: $desktop) {
-        form p {
-            font-size: 12px;
-        }
-
-        .sign-up-form label.custom-control-label {
-            font-size: 12px;
-        }
-    }
-
-    @media (min-width: $desktop) and (max-width: $desktop-large) {
-        form p {
-            font-size: 12px;
-        }
-
-        .sign-up-form label.custom-control-label {
-            font-size: 12px;
-        }
-    }
-
-    @include media-breakpoint-up(xl) {
-        .form-group {
-            margin: 0;
-        }
-
-        // .sign-up-form label.custom-control-label {
-        //     font-size: 12px;
-        // }
-
-        input.form-control,
-        select.form-control {
-            height: 30px;
-        }
     }
 }
 
@@ -260,16 +231,6 @@ $desktop-large: 1667px;
 
         .form-group {
             margin: 1px 0 0;
-        }
-
-        .form-description-1,
-        .user-consent-container label.custom-control-label {
-            font-size: 12px;
-        }
-
-        input.form-control,
-        select.form-control {
-            height: 30px;
         }
     }
 }

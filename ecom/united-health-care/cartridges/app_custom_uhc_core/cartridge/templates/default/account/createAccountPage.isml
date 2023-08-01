@@ -44,7 +44,9 @@
                                         <label class="custom-form-control-label uhc-sans-600" for="user-first-name">
                                             ${Resource.msg('form.input.label.firstname', 'createaccount', null)}
                                         </label>
-                                        <input type="text" required class="form-control required" id="user-first-name"
+                                        <input type="text" data-name="UHC Form first name"
+                                            data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}"
+                                            required class="form-control required" id="user-first-name"
                                             name="userFirstName"
                                             data-value-missing-error="${Resource.msg('error.message.first-name-missing', 'createaccount', null)}">
                                         <div class="invalid-feedback" id="user-first-name-error"></div>
@@ -57,7 +59,9 @@
                                         <label class="custom-form-control-label uhc-sans-600" for="user-last-name">
                                             ${Resource.msg('form.input.label.lastname', 'createaccount', null)}
                                         </label>
-                                        <input type="text" required class="form-control required" id="user-last-name"
+                                        <input type="text" data-name="UHC Form last name"
+                                            data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}"
+                                            required class="form-control required" id="user-last-name"
                                             name="userLastName"
                                             data-value-missing-error="${Resource.msg('error.message.last-name-missing', 'createaccount', null)}">
                                         <div class="invalid-feedback" id="user-last-name-error"></div>
@@ -70,7 +74,8 @@
                                         <label class="custom-form-control-label uhc-sans-600" for="user-phone">
                                             ${Resource.msg('form.input.label.phone', 'createaccount', null)}
                                         </label>
-                                        <input type="text"
+                                        <input type="text" data-name="UHC Form phone number"
+                                            data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}"
                                             placeholder="${Resource.msg('label.form.field.phone.placeholder', 'forms', null)}"
                                             required class="form-control required input-phone" id="user-phone"
                                             maxlength="12" pattern="(^\d{3}-\d{3}-\d{4}$)"
@@ -86,8 +91,10 @@
                                         <label class="custom-form-control-label uhc-sans-600" for="user-dob">
                                             ${Resource.msg('form.input.label.dob', 'createaccount', null)}
                                         </label>
-                                        <input type="date" required class="form-control required" id="user-dob"
-                                            name="userDob"
+                                        <input type="date" data-name="UHC Form phone number"
+                                            data-location="UHC Form Date of Birth"
+                                            placeholder="${Resource.msg('label.form.field.phone.placeholder', 'forms', null)}"
+                                            required class="form-control required" id="user-dob" name="userDob"
                                             data-range-error="${Resource.msg('error.message.invalid-dob', 'forms', null)}">
                                         <div class="invalid-input" id="user-dob-error"></div>
                                         <div class="invalid-feedback" id="user-dob-error"></div>
@@ -100,15 +107,17 @@
                                         <label class="custom-form-control-label uhc-sans-600" for="user-zipcode">
                                             ${Resource.msg('form.input.label.zip', 'createaccount', null)}
                                         </label>
-                                        <input type="text" required class="form-control required" id="user-zipcode"
-                                            name="userZipCode" maxlength="10" minlength="5"
+                                        <input type="text" data-name="UHC Form Zip Code"
+                                            data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}"
+                                            required class="form-control required" id="user-zipcode" name="userZipCode"
+                                            maxlength="10" minlength="5"
                                             pattern="(^\d{5}(-\d{4})?$)|(^[abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$)"
                                             data-pattern-mismatch="${Resource.msg('error.message.invalid-zipcode', 'createaccount', null)}">
                                         <div class="invalid-feedback" id="user-zipcode-error"></div>
                                     </div>
                                 </div>
 
-                                 <iscomment> Form title 1 </iscomment>
+                                <iscomment> Form title 1 </iscomment>
                                 <h1 class="card-title-2 uhc-sub-title uhc-blue mt-4 pt-2">
                                     ${Resource.msg('form.title.second', 'createaccount', null)}
                                 </h1>
@@ -120,7 +129,9 @@
                                         class="custom-form-control-label required uhc-sans-600">
                                         ${Resource.msg('form.input.label.health-plan-name', 'createaccount', null)}
                                     </label>
-                                    <select type="text" class="form-control custom-select custom-form-control-label"
+                                    <select type="text" data-name="UHC Form Health Plan Name"
+                                        data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}"
+                                        class="form-control custom-select custom-form-control-label"
                                         name="healthPlanName" id="health-plan-name">
                                         <option
                                             value="${Resource.msg('form.input.options.value.unitedhealthcare', 'createaccount', null)}">
@@ -137,8 +148,9 @@
                                 <div class="form-group mt-4 mb-0 d-none other-health-plan-value-container">
                                     <label for="other-health-plan"
                                         class="custom-form-control-label required uhc-sans-600">${Resource.msg('form.input.options.label.other', 'createaccount', null)}</label>
-                                    <input type="text" class="form-control" id="other-health-plan"
-                                        name="otherHealthPlan">
+                                    <input type="text" data-name="UHC Form Other Health Plan Name"
+                                        data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}"
+                                        class="form-control" id="other-health-plan" name="otherHealthPlan">
                                     <div class="invalid-feedback" id="other-health-plan-name-error"></div>
                                 </div>
 
@@ -153,7 +165,9 @@
                                             </div>
                                         </div>
                                     </label>
-                                    <input type="text" required class="form-control" id="member-id" name="memberId">
+                                    <input type="text" data-name="UHC Form Member ID"
+                                        data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}"
+                                        required class="form-control" id="member-id" name="memberId">
                                     <div class="invalid-feedback" id="member-id-error"></div>
                                 </div>
 
@@ -164,11 +178,10 @@
 
                                 <iscomment> Create Account Btn </iscomment>
                                 <div class="btn-container-create-account mx-auto mb-4 mt-0 pb-3 pt-0">
-                                    <button class="btn btn-primary w-100 btn-create-account disabled custom-datalayer" type="submit"
-                                    name="submit" 
-                                    value="submit"
-                                    data-name="${Resource.msg('label.adobe.create-account.submit', 'createaccount', null)}" 
-                                    data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}">
+                                    <button class="btn btn-primary w-100 btn-create-account disabled custom-datalayer"
+                                        type="submit" name="submit" value="submit"
+                                        data-name="${Resource.msg('label.adobe.create-account.submit', 'createaccount', null)}"
+                                        data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}">
                                         ${Resource.msg('label.btn.create-account', 'createaccount', null)}
                                     </button>
                                 </div>

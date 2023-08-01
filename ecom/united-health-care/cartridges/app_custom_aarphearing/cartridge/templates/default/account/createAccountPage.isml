@@ -44,7 +44,9 @@
                                         <label class="custom-form-control-label uhc-sans-600" for="user-first-name">
                                             ${Resource.msg('form.input.label.firstname', 'createaccount', null)}
                                         </label>
-                                        <input type="text" required class="form-control required" id="user-first-name"
+                                        <input type="text" data-name="AARP Form First Name"
+                                            data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}"
+                                            required class="form-control required" id="user-first-name"
                                             name="userFirstName"
                                             data-value-missing-error="${Resource.msg('error.message.first-name-missing', 'createaccount', null)}">
                                         <div class="invalid-feedback" id="user-first-name-error"></div>
@@ -57,7 +59,9 @@
                                         <label class="custom-form-control-label uhc-sans-600" for="user-last-name">
                                             ${Resource.msg('form.input.label.lastname', 'createaccount', null)}
                                         </label>
-                                        <input type="text" required class="form-control required" id="user-last-name"
+                                        <input type="text" data-name="AARP Form Last Name"
+                                            data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}"
+                                            required class="form-control required" id="user-last-name"
                                             name="userLastName"
                                             data-value-missing-error="${Resource.msg('error.message.last-name-missing', 'createaccount', null)}">
                                         <div class="invalid-feedback" id="user-last-name-error"></div>
@@ -70,7 +74,8 @@
                                         <label class="custom-form-control-label uhc-sans-600" for="user-phone">
                                             ${Resource.msg('form.input.label.phone', 'createaccount', null)}
                                         </label>
-                                        <input type="text"
+                                        <input type="text" data-name="AARP Form Phone Number"
+                                            data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}"
                                             placeholder="${Resource.msg('label.form.field.phone.placeholder', 'forms', null)}"
                                             required class="form-control required input-phone" id="user-phone"
                                             maxlength="12" pattern="(^\d{3}-\d{3}-\d{4}$)"
@@ -86,8 +91,9 @@
                                         <label class="custom-form-control-label uhc-sans-600" for="user-dob">
                                             ${Resource.msg('form.input.label.dob', 'createaccount', null)}
                                         </label>
-                                        <input type="date" required class="form-control required" id="user-dob"
-                                            name="userDob"
+                                        <input type="date" data-name="AARP Form Date of Birth"
+                                            data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}"
+                                            required class="form-control required" id="user-dob" name="userDob"
                                             data-range-error="${Resource.msg('error.message.invalid-dob', 'forms', null)}">
                                         <div class="invalid-input" id="user-dob-error"></div>
                                         <div class="invalid-feedback" id="user-dob-error"></div>
@@ -100,8 +106,10 @@
                                         <label class="custom-form-control-label uhc-sans-600" for="user-zipcode">
                                             ${Resource.msg('form.input.label.zip', 'createaccount', null)}
                                         </label>
-                                        <input type="text" required class="form-control required" id="user-zipcode"
-                                            name="userZipCode" maxlength="10" minlength="5"
+                                        <input type="text" data-name="AARP Form Zip Code"
+                                            data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}"
+                                            required class="form-control required" id="user-zipcode" name="userZipCode"
+                                            maxlength="10" minlength="5"
                                             pattern="(^\d{5}(-\d{4})?$)|(^[abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$)"
                                             data-pattern-mismatch="${Resource.msg('error.message.invalid-zipcode', 'createaccount', null)}">
                                         <div class="invalid-feedback" id="user-zipcode-error"></div>
@@ -129,8 +137,10 @@
                                                 <iscontentasset aid="healthplan-memberid-info-tooltip" />
                                             </div>
                                         </div>
-                                        </label>
-                                    <input type="text" class="form-control" id="aarp-membership-number" name="memberId">
+                                    </label>
+                                    <input type="text" data-name="AARP Form Memebership Number"
+                                        data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}"
+                                        class="form-control" id="aarp-membership-number" name="memberId">
                                     <div class="my-4">
                                         <iscontentasset aid="aarp-join-or-renew" />
                                     </div>
@@ -138,11 +148,10 @@
 
                                 <iscomment> Create Account Btn </iscomment>
                                 <div class="btn-container-create-account mx-auto mb-4 mt-0 pb-3 pt-0">
-                                    <button class="btn btn-primary w-100 btn-create-account disabled custom-datalayer" type="submit"
-                                    name="submit" 
-                                    value="submit"
-                                    data-name="${Resource.msg('label.adobe.create-account.submit', 'createaccount', null)}" 
-                                    data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}">
+                                    <button class="btn btn-primary w-100 btn-create-account disabled custom-datalayer"
+                                        type="submit" name="submit" value="submit"
+                                        data-name="${Resource.msg('label.adobe.create-account.submit', 'createaccount', null)}"
+                                        data-location="${Resource.msg('label.adobe.create-account.page', 'createaccount', null)}">
                                         ${Resource.msg('label.btn.create-account', 'createaccount', null)}
                                     </button>
                                 </div>

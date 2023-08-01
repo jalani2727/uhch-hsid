@@ -179,6 +179,7 @@ $desktop-large: 1667px;
     img {
         width: auto;
         height: 100vh;
+        min-width: 100%;
 
         @media (min-width: 1932px) {
             width: 100%;

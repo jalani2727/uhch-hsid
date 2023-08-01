@@ -175,8 +175,16 @@ $desktop: 1440px;
 
 .image-container {
     img {
-        width: 100%;
-        height: 100%;
+        width: auto;
+        height: 100vh;
+
+        @media (min-width: 1932px) {
+            width: 100%;
+            height: 100%;
+        }
+
+        max-width: none;
+        text-align: center;
     }
 }
 

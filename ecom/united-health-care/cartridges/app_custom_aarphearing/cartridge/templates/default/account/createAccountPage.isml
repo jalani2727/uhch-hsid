@@ -11,7 +11,7 @@
         data-future-dob-error-msg="${Resource.msg('error.message.future-dob', 'createaccount', null)}">
 
         <iscomment> Background </iscomment>
-        <div class="image-container hidden-md-down">
+        <div class="image-container hidden-sm-down">
             <picture>
                 <img src="${URLUtils.staticURL('/images/aarp_hearing-signup-4.jpg')}" alt="Background Image"
                     class="img-fluid" />

@@ -11,7 +11,7 @@
         data-future-dob-error-msg="${Resource.msg('error.message.future-dob', 'createaccount', null)}">
 
         <iscomment> Background </iscomment>
-        <div class="image-container hidden-md-down">
+        <div class="image-container hidden-sm-down">
             <picture>
                 <img src="${URLUtils.staticURL('/images/epic_hearing-signup.png')}" alt="Background Image"
                     class="img-fluid" />
@@ -152,4 +152,5 @@
 
         </div>
     </div>
+
 </isdecorate>

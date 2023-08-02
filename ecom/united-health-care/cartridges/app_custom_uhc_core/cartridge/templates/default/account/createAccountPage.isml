@@ -11,14 +11,17 @@
         data-future-dob-error-msg="${Resource.msg('error.message.future-dob', 'createaccount', null)}">
 
         <iscomment> Background </iscomment>
-        <div class="hsid-image-container">
-            <img src="${URLUtils.staticURL('/images/aarp_hearing-signup-4.jpg')}" alt="Background Image" />
+        <div class="image-container hidden-md-down">
+            <picture>
+                <img src="${URLUtils.staticURL('/images/uhc_hearing-signup.png')}" alt="Background Image"
+                    class="img-fluid" />
+            </picture>
         </div>
 
-        <div class="container hero-container hsid-hero-container">
+        <div class="container hero-container">
             <div class="row">
                 <iscomment> Left Side </iscomment>
-                <div class="text-content">
+                <div class="text-content col-12">
                     <img class="" src="${URLUtils.staticURL('/images/logo.svg')}"
                         alt="${Resource.msg('global.storename', 'common', null)}" />
                     <h1 class="hero-title mb-3 mt-3">${Resource.msg('login.header-h1', 'login', null)}</h1>
@@ -28,7 +31,7 @@
 
                 </div>
                 <iscomment> Right-side </iscomment>
-                <div class="sign-up-form">
+                <div class="sign-up-form col-12">
                     <div class="card">
                         <div class="card-body pt-0">
                             <div class="api-error-message"> </div>

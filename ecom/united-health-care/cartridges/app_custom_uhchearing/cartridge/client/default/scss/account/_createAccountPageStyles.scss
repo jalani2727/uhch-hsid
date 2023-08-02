@@ -2,6 +2,7 @@
 $desktop-small: 1280px;
 $desktop: 1440px;
 $desktop-large: 1667px;
+$desktop-huge: 1932px;
 
 // ----- create account page styles
 .create-account-page {
@@ -137,6 +138,7 @@ $desktop-large: 1667px;
 
     input[type='date'] {
         -webkit-appearance: none;
+        appearance: none;
 
         &::-webkit-date-and-time-value {
             text-align: left;
@@ -181,7 +183,7 @@ $desktop-large: 1667px;
         height: 100vh;
         min-width: 100%;
 
-        @media (min-width: 1932px) {
+        @media (min-width: $desktop-huge) {
             width: 100%;
             height: 100%;
         }
@@ -232,5 +234,50 @@ $desktop-large: 1667px;
         .form-group {
             margin: 1px 0 0;
         }
+    }
+}
+
+/* Changes */
+.hsid-background-image {
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+    
+    img {
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+    }
+}
+
+.hsid-hero-container {
+    .row {
+        align-items: flex-start;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        margin: 0;
+        width: 100%;
+
+
+        .text-content {
+            background-color: #fff;
+            margin-top: 35px;
+            max-width: 530px;
+            padding: 20px 20px 16px;
+        }
+
+        .sign-up-form {
+            margin-top: 35px;
+            max-width: 530px;
+            padding: 0;
+        }
+    }
+
+    @media only screen and (min-width: $desktop-large) {
+        max-width: 1366px; // can be another width, just need more space between objects
     }
 }

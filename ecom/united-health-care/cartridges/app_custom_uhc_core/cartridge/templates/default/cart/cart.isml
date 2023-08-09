@@ -80,10 +80,9 @@
                         </isif>
                         <!-- OTC Benefit application -->
                         <div class="otc-benefit-status-container d-none d-sm-block">
-
-                           <isif condition="${JSON.parse(session.privacy.customerDetails).MA_type !== null && pdict.benefits.deductibleMet.toLowerCase() === 'yes'}" >
+                           <isif condition="${session.privacy.customerDetails && JSON.parse(session.privacy.customerDetails).MA_type !== null && pdict.benefits.deductibleMet.toLowerCase() === 'yes'}" >
                                 <iscontentasset aid="benefit-application-ma-messages-yes" />
-                            <elseif condition="${JSON.parse(session.privacy.customerDetails).MA_type !== null && pdict.benefits.deductibleMet.toLowerCase() === 'no'}" >
+                            <elseif condition="${session.privacy.customerDetails && JSON.parse(session.privacy.customerDetails).MA_type !== null && pdict.benefits.deductibleMet.toLowerCase() === 'no'}" >
                                 <iscontentasset aid="benefit-application-ma-messages-no" />
                             <elseif condition="${pdict.benefits.deductibleMet.toLowerCase() === 'yes'}" >
                                 <iscontentasset aid="benefit-application-messages-yes" />
@@ -93,7 +92,6 @@
                                 <iscontentasset aid="otc-benefit-application-messages" />
                             </isif>
                         </div>
-                        </div>
                         <isinclude template="cart/cartPromoCode" />
                         <div class="coupons-and-promos">
                             <isinclude template="cart/cartCouponDisplay" />
@@ -101,18 +99,17 @@
                         <div class="row total-block">
                             <!-- OTC Benefit application -->
                             <div class="otc-benefit-status-container col-lg d-sm-none">
-                               <isif condition="${JSON.parse(session.privacy.customerDetails).MA_type !== null && pdict.benefits.deductibleMet.toLowerCase() === 'yes'}" >
+                               <isif condition="${session.privacy.customerDetails && JSON.parse(session.privacy.customerDetails).MA_type !== null && pdict.benefits.deductibleMet.toLowerCase() === 'yes'}" >
                                     <iscontentasset aid="benefit-application-ma-messages-yes" />
-                                <elseif condition="${JSON.parse(session.privacy.customerDetails).MA_type !== null && pdict.benefits.deductibleMet.toLowerCase() === 'no'}" >
+                                <elseif condition="${session.privacy.customerDetails && JSON.parse(session.privacy.customerDetails).MA_type !== null && pdict.benefits.deductibleMet.toLowerCase() === 'no'}" >
                                     <iscontentasset aid="benefit-application-ma-messages-no" />
                                 <elseif condition="${pdict.benefits.deductibleMet.toLowerCase() === 'yes'}" >
                                     <iscontentasset aid="benefit-application-messages-yes" />
                                 <elseif condition="${pdict.benefits.deductibleMet.toLowerCase() === 'no'}" >
                                     <iscontentasset aid="benefit-application-messages-no" />
                                 <iselse>
-                                        <iscontentasset aid="otc-benefit-application-messages" />
+                                    <iscontentasset aid="otc-benefit-application-messages" />
                                 </isif>
-                            </div>
                             </div>
                             <div class="col-12">
                                 <isinclude template="cart/cartTotals" />

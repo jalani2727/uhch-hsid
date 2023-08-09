@@ -77,9 +77,9 @@
                     <div class="totals mt-md-4">
                         <!-- OTC Benefit application -->
                         <div class="otc-benefit-status-container d-none d-sm-block">
-                            <isif condition="${JSON.parse(session.privacy.customerDetails).MA_type !== null && pdict.benefits.deductibleMet.toLowerCase() === 'yes'}" >
+                            <isif condition="${session.privacy.customerDetails && JSON.parse(session.privacy.customerDetails).MA_type !== null && pdict.benefits.deductibleMet.toLowerCase() === 'yes'}" >
                                 <iscontentasset aid="benefit-application-ma-messages-yes" />
-                            <elseif condition="${JSON.parse(session.privacy.customerDetails).MA_type !== null && pdict.benefits.deductibleMet.toLowerCase() === 'no'}" >
+                            <elseif condition="${session.privacy.customerDetails && JSON.parse(session.privacy.customerDetails).MA_type !== null && pdict.benefits.deductibleMet.toLowerCase() === 'no'}" >
                                 <iscontentasset aid="benefit-application-ma-messages-no" />
                             <elseif condition="${pdict.benefits.deductibleMet.toLowerCase() === 'yes'}" >
                                 <iscontentasset aid="benefit-application-messages-yes" />
@@ -96,9 +96,9 @@
                         <div class="row total-block">
                             <!-- OTC Benefit application -->
                             <div class="otc-benefit-status-container col-lg d-sm-none">
-                                <isif condition="${JSON.parse(session.privacy.customerDetails).MA_type !== null && pdict.benefits.deductibleMet.toLowerCase() === 'yes'}" >
+                                <isif condition="${session.privacy.customerDetails && JSON.parse(session.privacy.customerDetails).MA_type !== null && pdict.benefits.deductibleMet.toLowerCase() === 'yes'}" >
                                     <iscontentasset aid="benefit-application-ma-messages-yes" />
-                                <elseif condition="${JSON.parse(session.privacy.customerDetails).MA_type !== null && pdict.benefits.deductibleMet.toLowerCase() === 'no'}" >
+                                <elseif condition="${session.privacy.customerDetails && JSON.parse(session.privacy.customerDetails).MA_type !== null && pdict.benefits.deductibleMet.toLowerCase() === 'no'}" >
                                     <iscontentasset aid="benefit-application-ma-messages-no" />
                                 <elseif condition="${pdict.benefits.deductibleMet.toLowerCase() === 'yes'}" >
                                     <iscontentasset aid="benefit-application-messages-yes" />

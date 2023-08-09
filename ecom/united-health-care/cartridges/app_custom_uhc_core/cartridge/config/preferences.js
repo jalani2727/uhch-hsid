@@ -38,4 +38,6 @@ base.hsId_portal = currentSite.getCustomPreferenceValue('hsId_portal');
 base.hsId_portal_redirect_uri = currentSite.getCustomPreferenceValue('hsId_portal_redirect_uri');
 base.enableOrderCustomerUpdate = currentSite.getCustomPreferenceValue('enableOrderCustomerUpdate');
 base.orderHistoryDate = currentSite.getCustomPreferenceValue('orderHistoryDate');
+base.hsidSignInURL = currentSite.getCustomPreferenceValue('hsidSignInURL');
+base.benefitCalculationAPPID = currentSite.getCustomPreferenceValue('benefitCalculationAPPID');
 module.exports = base;

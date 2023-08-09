@@ -1,16 +1,9 @@
 'use strict';
 
 var base = require('base/product/base');
+var util = require('core/cart/cartUtil');
 var focusHelper = require('base/components/focus');
-var otcBenefitStatus = $('.cart-page').attr('data-otc-benefit-status');
 var findOTCStatusURL = $('.cart-page').attr('data-otc-status-url');
-var otcBenefitStatusValues = {
-    BENEFIT_VERIFIED_ONLY: 'benefitVerifiedOnly',
-    BENEFIT_APPLIED: 'benefitApplied',
-    BENEFIT_NOT_AVAILABLE: 'benefitNotAvailable',
-    ELIGIBILITY_IN_PROGRESS: 'eligibilityInProgress',
-    ELIGIBILITY_NOT_AVAILABLE: 'eligibilityNotAvailable'
-};
 
 /**
  * appends params to a url
@@ -66,30 +59,26 @@ function validateBasket(data) {
 }
 
 /**
- * Display OTC benefit application message
+ * updateOTCStatus: fetches updated OTC Status and displays OTC Status message accordingly.
  */
-function showOTCBenfitMsg() {
-    // Display different messages according to OTC Benefit application status
-    switch (otcBenefitStatus) {
-        case otcBenefitStatusValues.BENEFIT_APPLIED:
-            $('.benefit-not-available-msg, .eligibility-in-progress-msg, .eligibility-not-available-msg').addClass('d-none');
-            $('.benefit-applied-msg').removeClass('d-none');
-            break;
-        case otcBenefitStatusValues.BENEFIT_NOT_AVAILABLE:
-            $('.benefit-applied-msg, .eligibility-in-progress-msg, .eligibility-not-available-msg').addClass('d-none');
-            $('.benefit-not-available-msg').removeClass('d-none');
-            break;
-        case otcBenefitStatusValues.ELIGIBILITY_IN_PROGRESS:
-            $('.benefit-applied-msg, .benefit-not-available-msg, .eligibility-not-available-msg').addClass('d-none');
-            $('.eligibility-in-progress-msg').removeClass('d-none');
-            break;
-        case otcBenefitStatusValues.ELIGIBILITY_NOT_AVAILABLE:
-            $('.benefit-applied-msg, .benefit-not-available-msg, .eligibility-in-progress-msg').addClass('d-none');
-            $('.eligibility-not-available-msg').removeClass('d-none');
-            break;
-        default:
-            $('.benefit-applied-msg, .benefit-not-available-msg, .eligibility-in-progress-msg, .eligibility-not-available-msg').addClass('d-none');
-            return;
+function updateOTCStatus() {
+    if (findOTCStatusURL && findOTCStatusURL !== 'null') {
+        let otcBenefitStatus = '';
+
+        // Display different messages according to OTC Benefit application status
+        $.ajax({
+            url: findOTCStatusURL,
+            method: 'GET',
+            dataType: 'json',
+            success: function (result) {
+                otcBenefitStatus = result.OTCStatus;
+                util.showOTCBenefitMsg(otcBenefitStatus);
+            },
+            error: function () {
+                otcBenefitStatus = '';
+                util.showOTCBenefitMsg(otcBenefitStatus);
+            }
+        });
     }
 }
 
@@ -103,7 +92,7 @@ function updateCartTotals(data) {
     $('.tax-total').empty().append(data.totals.totalTax);
     $('.grand-total').empty().append(data.totals.grandTotal);
     $('.sub-total').empty().append(data.totals.subTotal);
-    $('.plan-benefit').empty().append(data.totals.productLevelDiscounts);
+    $('.plan-plan-benefit-total').empty().append(data.totals.productLevelDiscounts);
     $('.minicart-quantity').empty().append(data.numItems);
     $('.minicart-link').attr({
         'aria-label': data.resources.minicartCountOfItems,
@@ -115,6 +104,13 @@ function updateCartTotals(data) {
             .append('- ' + data.totals.orderLevelDiscountTotal.formatted);
     } else {
         $('.order-discount').addClass('hide-order-discount');
+    }
+    if (data.totals.productLevelDiscounts.value > 0) {
+        $('.plan-benefit').removeClass('hide-order-discount');
+        $('.plan-benefit-total').empty()
+            .append(data.totals.productLevelDiscounts.formatted);
+    } else {
+        $('.plan-benefit').addClass('hide-order-discount');
     }
 
     if (data.totals.shippingLevelDiscountTotal.value > 0) {
@@ -139,20 +135,8 @@ function updateCartTotals(data) {
         $('.item-total-' + item.UUID).empty().append(item.priceTotal.renderedPrice);
     });
 
-    if (otcBenefitStatus && otcBenefitStatus !== 'null' && findOTCStatusURL && findOTCStatusURL !== 'null') {
-        $.ajax({
-            url: findOTCStatusURL,
-            method: 'GET',
-            dataType: 'json',
-            success: function (result) {
-                otcBenefitStatus = result.OTCStatus;
-                showOTCBenfitMsg();
-            },
-            error: function () {
-                otcBenefitStatus = '';
-                showOTCBenfitMsg();
-            }
-        });
+    if (findOTCStatusURL && findOTCStatusURL !== 'null') {
+        updateOTCStatus();
     }
 }
 
@@ -861,5 +845,5 @@ module.exports = function () {
     base.focusChooseBonusProductModal();
     base.trapChooseBonusProductModalFocus();
     base.onClosingChooseBonusProductModal();
-    showOTCBenfitMsg();
+    updateOTCStatus();
 };

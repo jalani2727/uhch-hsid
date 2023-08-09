@@ -1,7 +1,9 @@
-<div class="credit-card-type">
-    <span>
-    ${payment.type}</span>
-</div>
-<div class="credit-card-number">
-    ${payment.maskedCreditCardNumber}
-</div>
+<isif condition="${payment.maskedCreditCardNumber && payment.type}">
+    <div class="credit-card-type">
+        <span>
+            ${payment.type}</span>
+    </div>
+    <div class="credit-card-number">
+        ${payment.maskedCreditCardNumber}
+    </div>
+</isif>

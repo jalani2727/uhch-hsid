@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 /* eslint-disable no-param-reassign */
 'use strict';
 
@@ -24,6 +25,7 @@ function setAARPCustomerType() {
  */
 function getCustomerDetails(externalProfile) {
     var middlewareServiceCallObj = '';
+    var sessionStorageHelper = require('*/cartridge/scripts/helpers/sessionStorageHelper');
     if (externalProfile.fromCart && externalProfile.AARP_Subscriber_ID !== null) {
         externalProfile.source = 1;
         externalProfile.sfdcContactID = externalProfile.sfdcContactID;
@@ -48,25 +50,37 @@ function getCustomerDetails(externalProfile) {
                     session.privacy.pricebook = eligibilityServiceCallObj.Pricebook_Id;
                     session.privacy.opportunityId = eligibilityServiceCallObj.Opportunity_Id;
                     session.privacy.customerDetails = JSON.stringify(eligibilityServiceCallObj);
-                    setAARPCustomerType();
                 } else if (eligibilityServiceCallObj.Pricebook_Id == null && eligibilityServiceCallObj.AARP_Subscriber_ID !== null && eligibilityServiceCallObj.sfdcContactId !== null) {
                     externalProfile.source = 1;
                     externalProfile.sfdcContactID = eligibilityServiceCallObj.sfdcContactId;
                     externalProfile.AARP_Subscriber_ID = eligibilityServiceCallObj.AARP_Subscriber_ID;
+                    sessionStorageHelper.setCustomerdetailInSessionLogin(eligibilityServiceCallObj);
                     // change get middleware according to new externalprofile values
-                    middlewareServiceCallObj = base.getMiddleware(externalProfile);
-                    if (middlewareServiceCallObj && ((middlewareServiceCallObj.code === '1') || (middlewareServiceCallObj.AARP_Member !== 'true'))) {
-                        middlewareServiceCallObj.error = true;
-                        return middlewareServiceCallObj;
+                    if (eligibilityServiceCallObj.AARP_Subscriber_ID && eligibilityServiceCallObj.AARP_Subscriber_ID !== '') {
+                        middlewareServiceCallObj = base.getMiddleware(externalProfile);
+                        if (middlewareServiceCallObj && ((middlewareServiceCallObj.code === '1') || (middlewareServiceCallObj.AARP_Member !== 'true'))) {
+                            // middlewareServiceCallObj.error = true;
+                            middlewareServiceCallObj.firstName = externalProfile.given_name;
+                            middlewareServiceCallObj.lastName = externalProfile.family_name;
+                            middlewareServiceCallObj.home_phone = externalProfile.phoneNumber;
+                            middlewareServiceCallObj.sfdcContactId = externalProfile.sfdcContactID;
+                            middlewareServiceCallObj.ZipCode = eligibilityServiceCallObj.ZipCode;
+                            session.privacy.AARP_Member = middlewareServiceCallObj.AARP_Member;
+                            setAARPCustomerType();
+                            return middlewareServiceCallObj;
+                        } else {
+                            session.privacy.AARP_Member = middlewareServiceCallObj.AARP_Member;
+                            setAARPCustomerType();
+                        }
+                    }
+                    if (eligibilityServiceCallObj.AARP_Subscriber_ID === '') {
+                        session.privacy.AARP_Member = false;
+                        setAARPCustomerType();
                     }
                 } else if (eligibilityServiceCallObj.AARP_Subscriber_ID == null && eligibilityServiceCallObj.Pricebook_Id !== null && externalProfile.requestSource !== 'registration') {
                     session.privacy.memberExists = false;
                 }
-                session.privacy.customerDetails = JSON.stringify(middlewareServiceCallObj);
-                session.privacy.AARP_Member = middlewareServiceCallObj.AARP_Member;
-                var sessionStorageHelper = require('*/cartridge/scripts/helpers/sessionStorageHelper');
                 sessionStorageHelper.setCustomerdetailInSessionLogin(eligibilityServiceCallObj);
-                setAARPCustomerType();
             }
             return eligibilityServiceCallObj;
         }

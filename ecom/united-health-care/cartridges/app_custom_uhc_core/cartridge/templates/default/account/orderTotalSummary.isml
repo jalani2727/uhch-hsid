@@ -9,6 +9,18 @@
         </div>
     </div>
 
+    <!--- Benefit Amount --->
+    <isif condition="${totals.benefitAmount !== '$0.00'}">
+        <div class="row">
+            <div class="col-6">
+                <p class="order-receipt-label"><span>${Resource.msg('label.order.benefit', 'common', null)}:</span></p>
+            </div>
+            <div class="col-6">
+                <p class="text-right"><span class="grand-total-sum">${totals.benefitAmount}</span></p>
+            </div>
+        </div>
+    </isif>
+
     <!--- Order Discount --->
     <isif condition="${totals.productDiscount === '$0.00'}">
         <isset name="hideorderdiscountclass" value="hide-order-discount" scope="page" />
@@ -40,7 +52,7 @@
     <iselse/>
         <isset name="hideshippingdiscountclass" value="" scope="page" />
     </isif>
-    <div class="row shipping-discount ${hideshippingdiscountclass}">
+    <div class="row  ${hideshippingdiscountclass}">
         <div class="col-6">
             <p class="order-receipt-label"><span>${Resource.msg('label.order.total.shipping.discount', 'orderDetails', null)}:</span></p>
         </div>

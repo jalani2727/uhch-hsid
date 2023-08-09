@@ -23,7 +23,7 @@ function getViewCoverageType() {
         if (feeScheduleType) {
             if (feeScheduleType === 'Preferred' && maType && (maType === 'A' || maType === 'B')) {
                 viewCoverageType = 'DynamicUHC-1';
-            } else if (feeScheduleType === 'Complete') {
+            } else if (feeScheduleType === 'Complete' || (feeScheduleType === 'Preferred' && !maType)) {
                 viewCoverageType = 'DynamicUHC-2';
             }
         }

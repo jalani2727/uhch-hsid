@@ -1,0 +1,228 @@
+<iscomment> Begin: Start Page </iscomment>
+<fieldset class="screener-pg-1" data-question-start="q1-unfilled">
+    <img alt="getting started image" src="${URLUtils.staticURL('/images/questionnaire-ear.svg')}" />
+    <h1>
+        ${Resource.msg('label.hearing-screener.body-1.heading', 'hearingscreener', null)}
+    </h1>
+    <p>
+        ${Resource.msg('label.hearing-screener.body-1.subheading', 'hearingscreener', null)}
+    </p>
+
+    <div class="screener-info">
+        <p class="mins-icon">${Resource.msg('text.screener-info-minutes', 'hearingscreener', null)}</p>
+        <p class="question-icon">${Resource.msg('text.screener-info-questions', 'hearingscreener', null)}</p>
+    </div>
+    <a href="javascript:void(0)" class="next btn-next btn btn-primary mb-5">
+        ${Resource.msg('label.hearing-screener.btn.start', 'hearingscreener', null)}
+    </a>
+</fieldset>
+<iscomment> End: Start Page </iscomment>
+
+<iscomment> Begin: Question Slides </iscomment>
+<fieldset class="screener-q1" id="screener-q1" data-question-filled="q1-filled" data-question-start="q1-unfilled">
+
+    <a href="javascript:void(0)" id="pg1-back" class="previous btn-back">
+        ${Resource.msg('global.label.back', 'common', null)}
+    </a>
+    <h1>
+        ${Resource.msg('text.question.q1', 'hearingscreener', null)}
+    </h1>
+    <p>
+        ${Resource.msg('text.question.select-one', 'hearingscreener', null)}
+    </p>
+
+    <ul>
+        <li>
+            <input type="radio" id="q1-1" name="q1" />
+            <label for="q1-1">${Resource.msg('text.question.q1.choice-1', 'hearingscreener', null)}</label>
+        </li>
+        <li>
+            <input type="radio" id="q1-2" name="q1" />
+            <label for="q1-2">${Resource.msg('text.question.q1.choice-2', 'hearingscreener', null)}</label>
+        </li>
+        <li>
+            <input type="radio" id="q1-3" name="q1" />
+            <label for="q1-3">${Resource.msg('text.question.q1.choice-3', 'hearingscreener', null)}</label>
+        </li>
+        <li>
+            <input type="radio" id="q1-4" name="q1" />
+            <label for="q1-4">${Resource.msg('text.question.q1.choice-4', 'hearingscreener', null)}</label>
+        </li>
+        <li>
+            <input type="radio" id="q1-4" name="q1" />
+            <label for="q1-4">${Resource.msg('text.question.q1.choice-5', 'hearingscreener', null)}</label>
+        </li>
+    </ul>
+
+    <a href="javascript:void(0)" id="q2-btn" class="next btn-next btn btn-primary mb-5">
+        ${Resource.msg('label.hearing-screener.btn.next-question', 'hearingscreener', null)}
+    </a>
+
+</fieldset>
+
+<fieldset class="screener-q2" id="screener-q2" data-question-filled="q2-filled" data-question-start="q2-unfilled">
+
+    <a href="javascript:void(0)" id="q1-back" class="previous btn-back">
+        ${Resource.msg('global.label.back', 'common', null)}
+    </a>
+    <h1>
+        ${Resource.msg('text.question.q2', 'hearingscreener', null)}
+    </h1>
+    <p>
+        ${Resource.msg('text.question.select-one', 'hearingscreener', null)}
+    </p>
+
+    <ul>
+        <li>
+            <input type="radio" id="q2-1" name="q2" />
+            <label for="q2-1">${Resource.msg('text.question.q2.choice-1', 'hearingscreener', null)}</label>
+        </li>
+        <li>
+            <input type="radio" id="q2-2" name="q2" />
+            <label for="q2-2">${Resource.msg('text.question.q2.choice-2', 'hearingscreener', null)}</label>
+        </li>
+        <li>
+            <input type="radio" id="q2-3" name="q2" />
+            <label for="q2-3">${Resource.msg('text.question.q2.choice-3', 'hearingscreener', null)}</label>
+        </li>
+    </ul>
+
+    <a href="javascript:void(0)" id="q3-btn" class="next btn-next btn btn-primary mb-5">
+        ${Resource.msg('label.hearing-screener.btn.next-question', 'hearingscreener', null)}
+    </a>
+
+</fieldset>
+
+
+<fieldset class="screener-q3" id="screener-q3" data-question-filled="q3-filled" data-question-start="q3-unfilled">
+    <a href="javascript:void(0)" id="q2-back" class="previous btn-back">
+        ${Resource.msg('global.label.back', 'common', null)}
+    </a>
+    <h1>
+        ${Resource.msg('text.question.q3', 'hearingscreener', null)}
+    </h1>
+    <p>
+        ${Resource.msg('text.question.select-one', 'hearingscreener', null)}
+    </p>
+
+    <ul>
+        <li>
+            <input type="radio" id="q3-1" name="q3" />
+            <label for="q3-1">${Resource.msg('text.question.q3.choice-1', 'hearingscreener', null)}</label>
+        </li>
+        <li>
+            <input type="radio" id="q3-2" name="q3" />
+            <label for="q3-2">${Resource.msg('text.question.q3.choice-2', 'hearingscreener', null)}</label>
+        </li>
+        <li>
+            <input type="radio" id="q3-3" name="q3" />
+            <label for="q3-3">${Resource.msg('text.question.q3.choice-3', 'hearingscreener', null)}</label>
+        </li>
+    </ul>
+
+    <a href="javascript:void(0)" id="q4-btn" class="next btn-next btn btn-primary mb-5">
+        ${Resource.msg('label.hearing-screener.btn.next-question', 'hearingscreener', null)}
+    </a>
+</fieldset>
+
+<fieldset class="screener-q4" id="screener-q4" data-question-filled="q4-filled" data-question-start="q4-unfilled">
+    <a href="javascript:void(0)" id="q3-back" class="previous btn-back">
+        ${Resource.msg('global.label.back', 'common', null)}
+    </a>
+    <h1>
+        ${Resource.msg('text.question.q4', 'hearingscreener', null)}
+    </h1>
+    <p>
+        ${Resource.msg('text.question.select-all', 'hearingscreener', null)}
+    </p>
+
+<iscomment> TODO: update layout to show two colums with 4 options each </iscomment>
+    <ul class="row">
+        <div class="col-12 col-md-6">
+            <li>
+                <input type="checkbox" id="q4-1" name="q4" />
+                <label for="q4-1">${Resource.msg('text.question.q4.choice-1', 'hearingscreener', null)}</label>
+            </li>
+            <li>
+                <input type="checkbox" id="q4-2" name="q4" />
+                <label for="q4-2">${Resource.msg('text.question.q4.choice-2', 'hearingscreener', null)}</label>
+            </li>
+            <li>
+                <input type="checkbox" id="q4-3" name="q4" />
+                <label for="q4-3">${Resource.msg('text.question.q4.choice-3', 'hearingscreener', null)}</label>
+            </li>
+            <li>
+                <input type="checkbox" id="q4-4" name="q4" />
+                <label for="q4-4">${Resource.msg('text.question.q4.choice-4', 'hearingscreener', null)}</label>
+            </li>
+            
+        </div>
+        <div class="col-12 col-md-6">
+            <li>
+                <input type="checkbox" id="q4-5" name="q4" />
+                <label for="q4-5">${Resource.msg('text.question.q4.choice-5', 'hearingscreener', null)}</label>
+            </li>
+            <li>
+                <input type="checkbox" id="q4-6" name="q4" />
+                <label for="q4-6">${Resource.msg('text.question.q4.choice-6', 'hearingscreener', null)}</label>
+            </li>
+            <li>
+                <input type="checkbox" id="q4-7" name="q4" />
+                <label for="q4-7">${Resource.msg('text.question.q4.choice-7', 'hearingscreener', null)}</label>
+            </li>
+            <li>
+                <input type="checkbox" id="q4-8" name="q4" />
+                <label for="q4-8">${Resource.msg('text.question.q4.choice-8', 'hearingscreener', null)}</label>
+            </li>
+            
+        </div>
+
+    </ul>
+
+    <a href="javascript:void(0)" id="results-btn" class="next btn-next btn btn-primary mb-5">
+        ${Resource.msg('label.input.screener-submit', 'hearingscreener', null)}
+    </a>
+</fieldset>
+<iscomment> End: Question Slides </iscomment>
+
+<fieldset class="screener-complete" data-question-start="progress-bar-complete">
+    <div class="desktop-background-gray">
+        <img alt="Questionnaite Complete Image" src="${URLUtils.staticURL('/images/CheckMrk.svg')}" />
+
+        <div class="screener-complete-container container">
+            <h1>
+                ${Resource.msg('label.hearing-screener.complete.heading', 'hearingscreener', null)}
+            </h1>
+            <p>
+                ${Resource.msg('label.hearing-screener.complete.subheading1', 'hearingscreener', null)}
+            </p>
+            <h3 class="pt-3 pb-3">
+                ${Resource.msg('label.hearing-screener.complete.subheading2', 'hearingscreener', null)}
+            </h3>
+
+            <div class="form-group">
+                <label class="form-control-label" for="contact-email">
+                    ${Resource.msg('label.input.screener-email', 'hearingscreener', null)}
+                </label>
+                <input placeholder="Email address" type="email" class="form-control"
+                    aria-describedby="form-contact-email-error" id="contact-email" name="contactEmail"
+                    value="${pdict.profile ? pdict.profile.email : ''}" pattern="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$"
+                    data-pattern-mismatch="${Resource.msg('error.message.form.invalid-email', 'forms', null)}">
+                <div class="invalid-feedback" id="form-contact-email-error"></div>
+
+                <input type="checkbox" id="email-opt-in" name="email-opt-in" />
+                <label for="email-opt-in" class="email-opt-in">${Resource.msg('label.input.screener-email-opt-in', 'hearingscreener', null)}</label>
+
+                <div class="submit-btns pt-4">
+                    <a href="javascript:void(0)" id="q4-btn" class="btn-submit btn btn-primary">
+                        ${Resource.msg('label.input.screener-submit', 'hearingscreener', null)}
+                    </a>
+                    <a href="javascript:void(0)" id="skip-to-results" class="btn-skip ml-4">
+                        ${Resource.msg('label.input.screener-skip', 'hearingscreener', null)}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</fieldset>

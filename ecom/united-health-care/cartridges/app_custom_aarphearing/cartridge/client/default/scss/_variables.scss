@@ -1,0 +1,76 @@
+@import "bootstrap/scss/functions";
+
+
+//UHC-Colors
+$primary-col-1: #0675a5;
+$primary-col-2: $white;
+$primary-col-3: #9bbb3d;
+$secondary-col-1: #00bed5;
+$secondary-col-2: #f5b11b;
+$secondary-col-3: #5a5a5a;
+$tints-col-1: #eff5fb;
+$tints-col-2: #d7e4b2;
+$tints-col-3: #5a5a5a;
+$tints-col-4: #f4f4f4;
+$tints-col-5: #dadbdc;
+$tints-col-6: #f6f6f6;
+$background-color: #e7f7fa;
+$color-blue-dark: #002677;
+
+$uhc-black: $black;
+$uhc-white: $primary-col-2;
+$uhc-title: $primary-col-1;
+$body-text-color: $tints-col-3;
+$uhc-link-color: #0675a5;
+$uhc-form-label: $grey8;
+$uhc-form-input: $tints-col-3;
+$uhc-form-input-border: $tints-col-3;
+$uhc-error: #c71300;
+$uhc-border-color: #c4c4c4;
+$uhc-section-border-color: #b3b9bc;
+$strike-price: $uhc-error;
+$grey-out-color: #bebebe;
+
+//Font
+$uhc-font-serif: 'UHCSerif', serif;
+$uhc-font-sans-medium: 'UHCSansMedium', sans-serif;
+$uhc-font-sans-semi-bold: 'UHCSansSemiBold', sans-serif;
+$uhc-font-sans-bold: 'UHCSansBold', sans-serif;
+
+$uhc-body-font: $uhc-font-sans-medium;
+$uhc-heading-font-1: $uhc-font-serif;
+$uhc-heading-font-2: $uhc-font-sans-bold;
+$uhc-link-font: $uhc-font-sans-medium;
+$uhc-form-label-font: $uhc-font-sans-semi-bold;
+
+//Buttons
+$uhc-btn-primary: $primary-col-1;
+$uhc-btn-primary-text: $primary-col-2;
+$uhc-btn-primary-hover: $primary-col-2;
+$uhc-btn-primary-hover-text: $primary-col-1;
+
+$uhc-btn-outline-primary: $primary-col-1;
+$uhc-btn-outline-primary-text: $primary-col-1;
+$uhc-btn-outline-primary-hover-text: $primary-col-2;
+
+$uhc-btn-disabled: $tints-col-4;
+$uhc-btn-disabled-text: #6f6f6f;
+
+//Inputs
+$checkbox-border: #6f6f6f;
+$checkbox-bg: $primary-col-1;
+$checkbox-bg-checked: #0675a5;
+
+//Grid
+$grid-breakpoints: (
+    xs: 0,
+    sm: 544px,
+    md: 769px,
+    lg: 1280px,
+    xl: 1440px
+);
+
+$container-max-widths: (
+    lg: 1220px,
+    xl: 1272px
+);

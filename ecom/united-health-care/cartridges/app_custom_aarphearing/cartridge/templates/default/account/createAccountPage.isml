@@ -9,7 +9,7 @@
     <div class="create-account-page aarp-hearing"
         data-health-plan-other="${Resource.msg('form.input.options.value.other', 'createaccount', null)}"
         data-max-dob-allowed-error-msg="${Resource.msg('error.message.invalid-dob', 'createaccount', null)}"
-        data-future-dob-error-msg="${Resource.msg('error.message.future-dob', 'createaccount', null)}">
+        data-future-dob-error-msg="${Resource.msg('error.message.future-dob', 'createaccount', null)}"  data-invalid-dob-date="${Resource.msg('error.message.dob-invalid','createaccount',null)}">
 
         <iscomment> Background </iscomment>
         <div class="image-container hidden-sm-down">

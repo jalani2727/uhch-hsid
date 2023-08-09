@@ -327,7 +327,9 @@ function extend(target, source) {
         _source = arguments[i];
         for (var prop in _source) {
             // recurse for non-API objects
-            if (_source[prop] && 'object' === typeof _source[prop] && !_source[prop].class) {
+            if (!_source.hasOwnProperty(prop)) continue;
+            if (prop === "__proto__" || prop === "constructor") continue;
+            if (_source.hasOwnProperty('prop') && _source[prop] && 'object' === typeof _source[prop] && !_source[prop].class && target.hasOwnProperty('prop') && target[prop]) {
                 target[prop] = extend(target[prop], _source[prop]);
             } else {
                 target[prop] = _source[prop];

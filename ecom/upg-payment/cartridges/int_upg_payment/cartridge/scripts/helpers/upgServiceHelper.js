@@ -27,6 +27,12 @@ function getIframeUrl(order) {
         if (requestIDResponse.error === 401) {
             requestIDResponse = UPGService.getServiceObj(returnURL, cancelURL, totalGrossPrice, true);
         }
+        if (requestIDResponse.error === 401) {
+            requestIDResponse = UPGService.getServiceObj(returnURL, cancelURL, totalGrossPrice, true);
+        }
+        if (requestIDResponse.error === 401) {
+            requestIDResponse = UPGService.getServiceObj(returnURL, cancelURL, totalGrossPrice, true);
+        }
 
         var splitRequest = requestIDResponse.object.text.split('&');
         var splitRequestID = splitRequest.find(function (element) {

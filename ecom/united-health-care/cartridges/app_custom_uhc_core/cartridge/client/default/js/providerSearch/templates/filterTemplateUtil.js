@@ -9,10 +9,10 @@ var LABELS = require('../utils/labelsUtil').LABELS;
  */
 function generateBrandsOptionsTemplate(brands) {
     return brands
-        .map(function (brand) {
-            return `<option value="${brand}">${brand}</option>`;
-        })
-        .join('');
+    .map(function (brand) {
+        return `<option value="${brand}">${brand}</option>`;
+    })
+    .join('');
 }
 
 /**
@@ -22,10 +22,10 @@ function generateBrandsOptionsTemplate(brands) {
  */
 function generateProviderTypeOptionsTemplate(providers) {
     return providers
-        .map(function (provider) {
-            return `<option value="${provider}">${provider}</option>`;
-        })
-        .join('');
+    .map(function (provider) {
+        return `<option value="${provider}">${provider}</option>`;
+    })
+    .join('');
 }
 
 /**

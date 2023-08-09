@@ -17,8 +17,8 @@ function getResultsListItemTemplate(result, markerImageUrl) {
     var responseHtml = '';
     if ($practiceView && $practiceView.data('requestAppointmentActionUrl')) {
         var preferredMarkerAltText = providerSearchUtil.isPreferredProvider(result)
-            ? LABELS.PREFERRED_PROVIDER
-            : LABELS.STANDARD_PROVIDER;
+        ? LABELS.PREFERRED_PROVIDER
+        : LABELS.STANDARD_PROVIDER;
         var distanceRounded = result.distance.toFixed(1);
         var url = new URL(requestAppointmentUrl);
         url.searchParams.set('address', result.address);

@@ -18,10 +18,10 @@ var SELECT_LABEL = $filterContainer.data('selectLabel');
 var $practiceView = domUtil.$viewElements.PRACTICE_VIEW;
 var GO_BACK_LABEL = $practiceView.data('goBackLabel');
 var REQUEST_APPOINTMENT_BUTTON_LABEL = $practiceView.data(
-    'requestAnAppointmentLabel'
+  'requestAnAppointmentLabel'
 );
 var PROVIDERS_AT_LOCATION_TITLE = $practiceView.data(
-    'providersAtLocationTitle'
+  'providersAtLocationTitle'
 );
 var HOURS_LABEL = $practiceView.data('hoursLabel');
 var NPI_LABEL = $practiceView.data('npiLabel');

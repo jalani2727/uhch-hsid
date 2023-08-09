@@ -9,12 +9,12 @@
 </div>
 
 <!--- Plan Benefit --->
-<div class="row order-discount uhc-black-333 <isif condition=" ${pdict.totals.productLevelDiscounts.value === 0}"> hide-order-discount </isif>">
+<div class="row plan-benefit-order-discount <isif condition=" ${pdict.order.totals.productLevelDiscounts.value === 0}">hide-order-discount</isif>">
     <div class="col-8">
         <p>${Resource.msg('label.order.benefit', 'common', null)}</p>
     </div>
     <div class="col-4">
-        <p class="text-right order-discount-total"> - ${pdict.totals.productLevelDiscounts.formatted}</p>
+        <p class="text-right order-discount-total"> ${pdict.order.totals.productLevelDiscounts.formatted}</p>
     </div>
 </div>
 

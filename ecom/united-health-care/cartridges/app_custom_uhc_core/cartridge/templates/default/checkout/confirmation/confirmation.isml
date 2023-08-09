@@ -24,7 +24,7 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 order-confirmation-details">
                 <isinclude template="checkout/confirmation/confirmationDetails" />
                 <div class="mb-3">
-                    <a href="${URLUtils.url('Home-Show')}" class="btn btn-primary btn-block order-confirmation-continue-shopping" role="button" aria-pressed="true">
+                    <a href="${dw.system.Site.current.preferences.custom.isHostURL ? 'https://' +request.httpHost : URLUtils.url('Home-Show')+ '/'}" class="btn btn-primary btn-block order-confirmation-continue-shopping" role="button" aria-pressed="true">
                         ${Resource.msg('button.continue.shopping','confirmation',null)}
                     </a>
                 </div>

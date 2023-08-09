@@ -7,7 +7,9 @@
                             null,
                             pdict.profile.firstName)}</h1>
             <p class="vc-text">${Resource.msg('authenticated.message.benefits','coverage',null)}</p>
-            <div class="vc-sub-title uhc-blue">${Resource.msg('authenticated.message.eligibility','coverage',null)}</div>
+            <div class="vc-sub-title uhc-blue">
+            <isset name="customerDetails" value="${session.privacy.customerDetails ? JSON.parse(session.privacy.customerDetails) : {}}" scope="page" />
+            ${customerDetails && empty(customerDetails.MA_Tye) && !empty(customerDetails.Benefits) && customerDetails.Formulary === 'Preferred' ? Resource.msg('coverage.message','coverage',null) : Resource.msg('authenticated.message.eligibility','coverage',null)}</div>
         </div>
 
         <div class="vc-section-two">

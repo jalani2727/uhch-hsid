@@ -11,7 +11,7 @@ var Payment = require('*/cartridge/models/somPayment');
 function SomBilling(somApiOrderSummary, somOrderToOrderPaymentSummariesMap) {
     var Account = {};
     this.payment = new Payment(somOrderToOrderPaymentSummariesMap, somApiOrderSummary.Id, somApiOrderSummary.OrderPaymentSummaries.records[0].PaymentMethodId);
-    if (this.payment.CardHolderName !== '-') {
+    if (this.payment && this.payment.CardHolderName && this.payment.CardHolderName !== '-') {
         var separator = this.payment.CardHolderName.indexOf(' ');
         if (separator !== -1) {
             Account.FirstName = this.payment.CardHolderName.slice(0, separator);

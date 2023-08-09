@@ -150,7 +150,7 @@ function getProvidersListHTML(providers, practiceId) {
                         data-provider-id="${index}">${provider.providerName}</a>
                     <div class="provider-address"></div>
                     <div class="provider-npi">${LABELS.NPI
-} ${provider.NPI || ''}</div>
+                } ${provider.NPI || ''}</div>
                 </div>`;
         })
         .join('');

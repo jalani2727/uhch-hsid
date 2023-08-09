@@ -207,6 +207,7 @@ function isBenefitApplicable() {
             var customerOrder = customerOrders.next();
             if ('isBenefitApplicable' in customerOrder.custom && customerOrder.custom.isBenefitApplicable) {
                 isBenefitApplicable = false;
+                session.privacy.OTCStatus = 'benefitNotAvailable';
                 return isBenefitApplicable;
             }
         }

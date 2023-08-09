@@ -198,9 +198,21 @@ server.append(
                 });
                 return;
             }
-
-            // Creates a new order.
-            var order = COHelpers.createOrder(currentBasket);
+            if (currentBasket && currentBasket.totalNetPrice.value === 0) {
+                if (req.querystring.zeroOrder === 'true') {
+                    const OrderMgr = require('dw/order/OrderMgr');
+                    var orderNumber = OrderMgr.createOrderNo();
+                    Transaction.wrap(function () {
+                        order = OrderMgr.createOrder(currentBasket, orderNumber);
+                    });
+                } else {
+                    res.redirect(URLUtils.url('Checkout-Begin', 'stage', 'shipping').toString());
+                    return next();
+                }
+            } else {
+                // Creates a new order.
+                var order = COHelpers.createOrder(currentBasket);
+            }
             if (!order) {
                 res.json({
                     error: true,
@@ -214,7 +226,7 @@ server.append(
             var servicehelper = require('*/cartridge/scripts/helpers/upgServiceHelper');
             var iframeURL = servicehelper.getIframeUrl(order);
 
-            billingData.iframeUrl = iframeURL;
+            billingData.iframeUrl = iframeURL && currentBasket.totalNetPrice.value > 0 ? iframeURL : URLUtils.url('CheckoutServices-PlaceOrder', 'orderNo', order.orderNo, 'zeroOrder', 'true').toString();
             billingData.createdOrder = order;
             billingData.valid = isValidCard;
             billingData.errorMsg = Resource.msg('error.upgcredit.decline', 'checkout', null);

@@ -21,7 +21,7 @@ function accountVerification() {
             var response = window.grecaptcha.getResponse();
             if (response.length === 0) {
                 // reCaptcha not verified
-                $('#g-recaptcha-error').html('<span>' + verifyCaptchaErrorMsg + '</span>');
+                $('.captcha-container').find('#g-recaptcha-error').text('<span>' + verifyCaptchaErrorMsg + '</span>');
                 return false;
             }
         }
@@ -82,39 +82,39 @@ function accountVerification() {
                         });
 
                     $('<input>')
-                        .appendTo(formData)
-                        .attr({
-                            name: 'invoiceBalance',
-                            value: result.invoiceBalance
-                        });
+                    .appendTo(formData)
+                    .attr({
+                        name: 'invoiceBalance',
+                        value: result.invoiceBalance
+                    });
 
                     $('<input>')
-                        .appendTo(formData)
-                        .attr({
-                            name: 'invoiceRecordId',
-                            value: result.invoiceRecordId
-                        });
+                    .appendTo(formData)
+                    .attr({
+                        name: 'invoiceRecordId',
+                        value: result.invoiceRecordId
+                    });
 
                     $('<input>')
-                        .appendTo(formData)
-                        .attr({
-                            name: 'opportunityId',
-                            value: result.opportunityId
-                        });
+                    .appendTo(formData)
+                    .attr({
+                        name: 'opportunityId',
+                        value: result.opportunityId
+                    });
 
                     $('<input>')
-                        .appendTo(formData)
-                        .attr({
-                            name: 'products',
-                            value: productsStr
-                        });
+                    .appendTo(formData)
+                    .attr({
+                        name: 'products',
+                        value: productsStr
+                    });
 
                     $('<input>')
-                        .appendTo(formData)
-                        .attr({
-                            name: 'emailAddress',
-                            value: result.emailAddress
-                        });
+                    .appendTo(formData)
+                    .attr({
+                        name: 'emailAddress',
+                        value: result.emailAddress
+                    });
 
                     formData.submit();
                 }

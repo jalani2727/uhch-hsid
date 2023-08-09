@@ -17,9 +17,18 @@
             </isif>
         </div>
 
-        <div class="payment-error-messaging cart-error d-none">
+        <div class="payment-error-messaging cart-error ${pdict.order.totals.grandTotal !== '$0.00' ? 'd-none' : '' }">
             <div class="alert alert-danger alert-dismissible valid-cart-error fade show" role="alert">
-                ${Resource.msg('upg.payment.notavailable', 'checkout', null)}
+                <isif condition="${pdict.order.totals.grandTotal === '$0.00'}">
+                    <button class="btn btn-primary btn-block button-refresh" data-action="${pdict.iframeUrl}" data-zaction="${URLUtils.url('Checkout-Begin', 'stage', 'payment', 'zeroOrder', 'true').toString()}"
+                        type="submit" name="submit" value="place-order">${Resource.msg('button.place.order', 'checkout', null)}
+                    </button>
+                    <button class="btn btn-primary btn-block place-order" data-action="${pdict.iframeUrl}"
+                        type="submit" name="submit" value="place-order">${Resource.msg('button.place.order', 'checkout', null)}
+                    </button>
+                <iselse>
+                    ${Resource.msg('upg.payment.notavailable', 'checkout', null)}
+                </isif>
             </div>
         </div>
 

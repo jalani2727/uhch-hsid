@@ -1,18 +1,3 @@
-<!--- Plan Benefit --->
-<div class="row order-discount plan-benefit <isif condition=" ${pdict.totals.productLevelDiscounts.value === 0}"> hide-order-discount </isif>">
-    <div class="col-8">
-        <p>${Resource.msg('label.order.benefit', 'common', null)}</p>
-    </div>
-    <div class="col-4">
-        <p class="text-right order-discount-total"> - ${pdict.totals.productLevelDiscounts.formatted}</p>
-    </div>
-</div>
-
-<div class="row order-discount <isif condition=" ${pdict.totals.productLevelDiscounts.value === 0}"> hide-order-discount </isif>">
-    <div class="col-8">
-        <p><a href="${URLUtils.https('Coverage-Show')}">${Resource.msg('label.order.coverage', 'common', null)}</a></p>
-    </div>
-</div>
 
 <!--- Sub Total --->
 <div class="row ">
@@ -21,6 +6,19 @@
     </div>
     <div class="col-4">
         <p class="text-right sub-total">${pdict.totals.subTotal}</p>
+    </div>
+</div>
+
+<!--- Plan Benefit --->
+<div class="row plan-benefit <isif condition=" ${pdict.totals.productLevelDiscounts.value === 0}">hide-order-discount </isif>">
+    <div class="col-8">
+        <p>${Resource.msg('label.order.benefit', 'common', null)}</p>
+    </div>
+    <div class="col-4">
+        <p class="text-right plan-benefit-total"> ${pdict.totals.productLevelDiscounts.formatted}</p>
+    </div>
+    <div class="col-8">
+        <p><a href="${URLUtils.https('Coverage-Show')}">${Resource.msg('label.order.coverage', 'common', null)}</a></p>
     </div>
 </div>
 
@@ -60,5 +58,14 @@
     </div>
     <div class="col-4">
         <p class="text-right grand-total">${pdict.totals.grandTotal}</p>
+    </div>
+</div>
+
+
+<div class="row benefit-api-applied">
+    <div class="col-12">
+        <isif condition="${!session.privacy.benefitAppliedToCart}" >
+            <iscontentasset aid="benefit-api-amount-applied" />
+        </isif>
     </div>
 </div>

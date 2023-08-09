@@ -25,18 +25,16 @@ function getService() {
  * Esso query member Service API call
  * @return {Object} return the result
  */
-function queryMember(userID) {
+function queryMember(userID, requestType) {
     var result;
-
     try {
         var AuthToken = require('*/cartridge/scripts/services/StargateAuthService');
         var StringUtils = require('dw/util/StringUtils');
-
         var service = getService();
         service.setRequestMethod('GET');
         service.addHeader('Content-Type', 'application/json');
         var authToken = new AuthToken();
-        var token = authToken.getValidToken(false);
+        var token = authToken.getValidToken(requestType);
         service.addHeader('Authorization', 'Bearer ' + token.access_token);
         service.setURL(StringUtils.format(service.getURL(), userID));
         result = service.call();

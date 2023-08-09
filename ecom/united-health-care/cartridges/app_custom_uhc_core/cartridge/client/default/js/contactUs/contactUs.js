@@ -64,11 +64,11 @@ module.exports = {
                         displayMessage(data, button);
                     } else if (data.success) {
                         var redirect = $('<form>')
-                            .appendTo(document.body)
-                            .attr({
-                                method: 'POST',
-                                action: data.redirectUrl
-                            });
+                        .appendTo(document.body)
+                        .attr({
+                            method: 'POST',
+                            action: data.redirectUrl
+                        });
                         redirect.submit();
                         $('.contact-us').trigger('reset');
                     }

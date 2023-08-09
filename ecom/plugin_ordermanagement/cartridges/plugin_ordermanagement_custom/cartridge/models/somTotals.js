@@ -13,7 +13,7 @@ function getProductLevelDiscounts(OrderItemSummaries) {
     var benefitAmount = 0;
     if (OrderItemSummaries.records.length > 0) {
         for (var i = 0; i < OrderItemSummaries.records.length; i++) {
-            benefitAmount += OrderItemSummaries.records[i].TotalLineAdjustmentAmount;
+            benefitAmount += OrderItemSummaries.records[i].UnitPrice;
         }
     }
     return Math.abs(benefitAmount);
@@ -40,6 +40,22 @@ function SomTotals(somApiOrderSummary, currencyCode) {
             this.subTotal = utilHelpers.formatMoney(getProductLevelDiscounts(somApiOrderSummary.OrderItemSummaries), currencyCode);
         }
     }
+
+    var totalQty = 0;
+    var benefitAmount = 0;
+    somApiOrderSummary.OrderItemSummaries.records.forEach(function (orderItemSummary) {
+        var originalOrder = orderItemSummary.OriginalOrderItem;
+        if (somApiOrderSummary.Status === 'Canceled') {
+            totalQty += parseInt(originalOrder.Quantity, 10);
+            benefitAmount += parseInt(orderItemSummary.TotalLineAdjustmentAmtWithTax, 10);
+        } else {
+            totalQty += parseInt(orderItemSummary.Quantity, 10);
+            benefitAmount += parseInt(orderItemSummary.TotalLineAdjustmentAmtWithTax, 10);
+        }
+
+    });
+    this.totalQuantity = totalQty;
+    this.benefitAmount = utilHelpers.formatMoney(Math.abs(benefitAmount), currencyCode);
 }
 
 module.exports = SomTotals;

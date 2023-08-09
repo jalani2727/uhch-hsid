@@ -219,7 +219,7 @@ function getAttributesHtml(attributes) {
  * @param {jQuery} $productContainer - DOM element for current product
  */
 function updateOptions(optionsHtml, $productContainer) {
-    // Update options
+	// Update options
     $productContainer.find('.product-options').empty().html(optionsHtml);
 }
 

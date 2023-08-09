@@ -19,9 +19,9 @@ function SomTotals(somApiOrderSummary, currencyCode) {
     this.totalQuantity = 0;
 
     if (somApiOrderSummary && somApiOrderSummary.OrderItemSummaries) {
-        if(somApiOrderSummary.Status === 'Canceled') {
+        if (somApiOrderSummary.Status === 'Canceled') {
             var originalOrder = somApiOrderSummary.OriginalOrder;
-            this.tax = originalOrder ? utilHelpers.formatMoney(originalOrder.TotalAdjustedProductTaxAmount, currencyCode)  : utilHelpers.formatMoney(somApiOrderSummary.TotalTaxAmount, currencyCode);
+            this.tax = originalOrder ? utilHelpers.formatMoney(originalOrder.TotalAdjustedProductTaxAmount, currencyCode) : utilHelpers.formatMoney(somApiOrderSummary.TotalTaxAmount, currencyCode);
             // subTotal is the amount exclude tax and shipping cost
             this.subTotal = originalOrder ? utilHelpers.formatMoney(originalOrder.TotalAdjustedProductAmount, currencyCode) : utilHelpers.formatMoney(somApiOrderSummary.TotalAdjustedProductAmount, currencyCode);
             this.shipping = originalOrder ? utilHelpers.formatMoney(originalOrder.TotalAdjustedDeliveryAmount, currencyCode) : utilHelpers.formatMoney(somApiOrderSummary.TotalAdjustedDeliveryAmount, currencyCode);
@@ -37,18 +37,23 @@ function SomTotals(somApiOrderSummary, currencyCode) {
             this.shippingDiscount = utilHelpers.formatMoney(somApiOrderSummary.TotalDeliveryAdjDistAmount, currencyCode);
             this.productDiscount = utilHelpers.formatMoney(somApiOrderSummary.TotalProductAdjDistAmount, currencyCode);
         }
-      
+
 
         var totalQty = 0;
+        var benefitAmount = 0;
         somApiOrderSummary.OrderItemSummaries.records.forEach(function (orderItemSummary) {
             var originalOrder = orderItemSummary.OriginalOrderItem;
-            if(somApiOrderSummary.Status === 'Canceled') {
+            if (somApiOrderSummary.Status === 'Canceled') {
                 totalQty += parseInt(originalOrder.Quantity, 10);
+                benefitAmount += parseInt(orderItemSummary.TotalLineAdjustmentAmtWithTax, 10);
             } else {
                 totalQty += parseInt(orderItemSummary.Quantity, 10);
+                benefitAmount += parseInt(orderItemSummary.TotalLineAdjustmentAmtWithTax, 10);
             }
+
         });
         this.totalQuantity = totalQty;
+        this.benefitAmount =  utilHelpers.formatMoney(benefitAmount, currencyCode);
     }
 }
 

@@ -44,6 +44,12 @@ function getEligibility(externalProfile) {
     var Site = require('dw/system/Site');
     var currentSiteID = Site.current.ID;
     var eligibilityRequest;
+    var hsIdUUID;
+    if (customer && session.privacy.hsIdUUID == null) {
+        hsIdUUID = customer.getProfile().credentials.externalID;
+    } else {
+        hsIdUUID = session.privacy.hsIdUUID;
+    }
     if (externalProfile.requestSource === 'registration') {
         eligibilityRequest = {
             lastName: externalProfile.family_name,
@@ -52,11 +58,13 @@ function getEligibility(externalProfile) {
             zipCode: externalProfile.zipCode,
             email: externalProfile.email,
             phoneNumber: externalProfile.phoneNumber,
-            hsIdUUID: session.privacy.hsIdUUID,
+            noInsurance: externalProfile.noInsurance,
+            hsIdUUID: hsIdUUID,
             subscriberId: externalProfile.subscriberId,
             healthPlanName: externalProfile.healthPlanName,
             siteId: currentSiteID,
-            requestSource: externalProfile.requestSource
+            requestSource: externalProfile.requestSource,
+            aarpSubscriberId: externalProfile.AARP_Subscriber_ID
         };
         session.privacy.healthPlanName = externalProfile.healthPlanName || '';
     } else if (externalProfile.requestSource === 'editProfile') {
@@ -64,25 +72,26 @@ function getEligibility(externalProfile) {
             zipCode: externalProfile.zipCode,
             email: externalProfile.email,
             siteId: currentSiteID,
-            hsIdUUID: session.privacy.hsIdUUID,
+            hsIdUUID: hsIdUUID,
             subscriberId: externalProfile.subscriberId,
             healthPlanName: externalProfile.healthPlanName,
             phoneNumber: externalProfile.phoneNumber,
-            communicationPreference: externalProfile.communicationPreference,
-            requestSource: 'EditProfile'
+            communication_Instruction: externalProfile.communicationPreference,
+            requestSource: 'EditProfile',
+            aarpSubscriberId: externalProfile.AARP_Subscriber_ID
         };
         session.privacy.healthPlanName = externalProfile.healthPlanName || '';
     } else if (externalProfile.requestSource === 'preRegistration') {
         eligibilityRequest = {
             email: externalProfile.email,
-            hsIdUUID: session.privacy.hsIdUUID,
+            hsIdUUID: hsIdUUID,
             siteId: currentSiteID,
             requestSource: externalProfile.requestSource
         };
     } else if (externalProfile.requestSource === 'login') {
         eligibilityRequest = {
             email: externalProfile.email,
-            hsIdUUID: session.privacy.hsIdUUID,
+            hsIdUUID: hsIdUUID,
             siteId: currentSiteID,
             requestSource: externalProfile.requestSource
         };
@@ -92,7 +101,7 @@ function getEligibility(externalProfile) {
             firstName: externalProfile.firstName,
             subscriberId: externalProfile.subscriberId,
             email: externalProfile.email,
-            hsIdUUID: session.privacy.hsIdUUID,
+            hsIdUUID: hsIdUUID,
             siteId: currentSiteID,
             requestSource: externalProfile.requestSource
         };

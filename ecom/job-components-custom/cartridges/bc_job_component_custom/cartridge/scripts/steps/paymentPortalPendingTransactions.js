@@ -1,7 +1,7 @@
 'use strict';
 
 var Transaction = require('dw/system/Transaction');
-var Logger = require('dw/system/Logger');
+var Logger = require('dw/system/Logger').getLogger('UPGPaymentJobError', 'UPGPaymentJobError');
 var CustomObjectMgr = require('dw/object/CustomObjectMgr');
 var StringUtils = require('dw/util/StringUtils');
 var Calendar = require('dw/util/Calendar');

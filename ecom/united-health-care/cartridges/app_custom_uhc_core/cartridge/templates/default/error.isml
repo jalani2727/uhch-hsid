@@ -7,7 +7,7 @@
         
         <div class="row justify-content-sm-center">
             <div class="col-auto">
-                <a href="${URLUtils.url('Home-Show')}" class="btn btn-primary error continue-shopping" role="button" aria-pressed="true">
+                <a href="${dw.system.Site.current.preferences.custom.isHostURL ? 'https://' +request.httpHost : URLUtils.url('Home-Show')+ '/'}" class="btn btn-primary error continue-shopping" role="button" aria-pressed="true">
                     ${Resource.msg('button.return.home','error',null)}
                 </a>
             </div>

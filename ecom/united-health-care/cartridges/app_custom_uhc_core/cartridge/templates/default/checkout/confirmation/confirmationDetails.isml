@@ -2,14 +2,14 @@
     <div class="card-header">
         <div class="card-header-custom">${Resource.msg('title.orderno', 'confirmation', null)}&nbsp;${pdict.order.orderNumber}</div>
     </div>
-
     <div class="card-body">
         <isinclude template="checkout/shipping/shippingSummary" />
-        <div class="summary-details">
-            <span class="summary-section-label payment-info-label">${Resource.msg('label.payment.method', 'confirmation', null)}</span>
-            <isinclude template="checkout/billing/paymentOptions/paymentOptionsSummary" />
-        </div>
-
+        <isif condition="${pdict.order.totals.grandTotal !== '$0.00'}">
+            <div class="summary-details">
+                <span class="summary-section-label payment-info-label">${Resource.msg('label.payment.method', 'confirmation', null)}</span>
+                <isinclude template="checkout/billing/paymentOptions/paymentOptionsSummary" />
+            </div>
+        </isif>
     </div>
 </div>
 

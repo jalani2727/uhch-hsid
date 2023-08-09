@@ -279,7 +279,6 @@ base.addLineItem = function addLineItem(
     if (productLineItem.product.custom.isOTCProduct) {
         base.applyPriceAdjustment(productLineItem);
     }
-
     productLineItem.setQuantityValue(quantity);
 
     return productLineItem;
@@ -461,22 +460,24 @@ base.checkPrescriptionId = function checkPrescriptionId(prescriptionProducts, pr
 base.applyPriceAdjustment = function applyPriceAdjustment(productLineItem) {
     var isOTCBenefitApplicable = base.checkOTCBenefit();
     var isBenefitApplicable = base.isBenefitApplicable();
+    if (!isBenefitApplicable) {
+        session.privacy.OTCStatus = 'benefitNotAvailable';
+    }
     if (isOTCBenefitApplicable && isBenefitApplicable) {
         var OTCBenefitRemaining = session.privacy.OTCBenefitRemaining;
         if (OTCBenefitRemaining > 0) {
             var maxAmountDiscount = getDiscountAmount(productLineItem);
-            if (maxAmountDiscount > 0) {
-                Transaction.wrap(function () {
-                    productLineItem.createPriceAdjustment(productLineItem.UUID + OTC_BENEFIT_ID, new dw.campaign.AmountDiscount(maxAmountDiscount));
-                });
-                session.privacy.OTCBenefitInCart = maxAmountDiscount;
-                session.privacy.OTCStatus = 'benefitApplied';
+            if (session.privacy.OTCDevicesCoverage === 'Yes' && session.privacy.NewPurchasePossible === 'Yes') {
+                base.benefitsCalculationsAPIForPLI(productLineItem);
             } else {
-                session.privacy.OTCStatus = 'benefitNotApplied';
+                if (maxAmountDiscount > 0) {
+                    Transaction.wrap(function () {
+                        productLineItem.createPriceAdjustment(productLineItem.UUID + OTC_BENEFIT_ID, new dw.campaign.AmountDiscount(maxAmountDiscount));
+                    });
+                    session.privacy.OTCBenefitInCart = maxAmountDiscount;
+                }
             }
         }
-    } else {
-        session.privacy.OTCStatus = 'benefitNotApplied';
     }
 };
 
@@ -500,15 +501,12 @@ base.checkOTCBenefit = function checkOTCBenefit() {
         var isOTCBenefitApplicable = false;
         if (OTCBenefitTotal && OTCBenefitTotal > 0 && OTCDevicesCoverage === 'Yes') {
             session.privacy.OTCBenefitRemaining = OTCBenefitRemaining;
-            session.privacy.OTCStatus = 'benefitApplied';
             isOTCBenefitApplicable = true;
         } else if (OTCBenefitTotal && OTCBenefitTotal === 0) {
             session.privacy.OTCBenefitRemaining = 0;
-            session.privacy.OTCStatus = 'benefitVerifiedOnly';
             isOTCBenefitApplicable = false;
         } else if (OTCDevicesCoverage !== 'Yes') {
             session.privacy.OTCBenefitRemaining = 0;
-            session.privacy.OTCStatus = 'eligibilityNotAvailable';
             isOTCBenefitApplicable = false;
         }
         return isOTCBenefitApplicable;
@@ -545,7 +543,13 @@ base.isBenefitApplicable = function isBenefitApplicable() {
 base.recalculatePriceAdjustments = function recalculatePriceAdjustments(currentBasket) {
     base.removeLinePriceAdjustments(currentBasket);
     base.addLinePriceAdjustments(currentBasket);
-    base.checkBenefitApplied(currentBasket);
+    var isBenefitInCart = base.checkBenefitApplied(currentBasket);
+    if (isBenefitInCart && session.privacy.OTCStatus !== 'benefitNotAvailable') {
+        session.privacy.OTCStatus = 'benefitApplied';
+    }
+    if (!isBenefitInCart && session.privacy.OTCStatus !== 'benefitNotAvailable') {
+        session.privacy.OTCStatus = 'benefitNotApplied';
+    }
 };
 
 base.removeLinePriceAdjustments = function removeLinePriceAdjustments(currentBasket) {
@@ -579,14 +583,107 @@ base.addLinePriceAdjustments = function addLinePriceAdjustments(currentBasket) {
 };
 
 base.checkBenefitApplied = function checkBenefitApplied(currentBasket) {
-    collections.forEach(currentBasket.productLineItems, function (productLineItem) {
-        var adjustments = productLineItem.priceAdjustments;
-        if (!adjustments.isEmpty()) {
-            session.privacy.OTCStatus = 'benefitApplied';
-        } else {
-            session.privacy.OTCStatus = 'benefitNotApplied';
+    var benefit = false;
+    if (currentBasket) {
+        collections.forEach(currentBasket.productLineItems, function (productLineItem) {
+            var adjustments = productLineItem.priceAdjustments;
+            if (!adjustments.isEmpty() && session.privacy.OTCStatus !== 'benefitNotAvailable') {
+                benefit = true;
+            }
+        });
+    }
+    return benefit;
+};
+
+base.benefitsCalculationsAPI = function benefitsCalculationsAPI(items) {
+    var BasketMgr = require('dw/order/BasketMgr');
+    var currentBasket = BasketMgr.getCurrentBasket();
+    base.removeLinePriceAdjustments(currentBasket);
+    var benefitsCalculationsAPI = require('*/cartridge/scripts/services/BenefitsCalculationsAPI');
+    var Logger = require('dw/system/Logger');
+    var benefitCalculationAPPID = session.privacy.opportunityId;
+    var products = [];
+    var benefitsCalculationsAPIRequestObj = {};
+    var ProductMgr = require('dw/catalog/ProductMgr');
+    for (var i = 0, ii = items.length; i < ii; i++) {
+        var item = items[i];
+        var product = ProductMgr.getProduct(item.id);
+        products.push({
+            productId: product && !product.isMaster() && product.isVariant() ? product.getMasterProduct().ID : product.ID,
+            quantity: item.quantity
+        });
+    }
+    benefitsCalculationsAPIRequestObj.oppId = benefitCalculationAPPID;
+    benefitsCalculationsAPIRequestObj.products = products;
+    var benefitsCalculationsAPIRespObj = benefitsCalculationsAPI.call(benefitsCalculationsAPIRequestObj, false);
+    if (benefitsCalculationsAPIRespObj.error === 401) {
+        benefitsCalculationsAPIRespObj = benefitsCalculationsAPI.call(benefitsCalculationsAPIRequestObj, true);
+    }
+    if (benefitsCalculationsAPIRespObj.status === 'OK') {
+        session.privacy.isBenefitsApiCallSuccessful = true;
+        benefitsCalculationsAPIRespObj = benefitsCalculationsAPIRespObj.object ? benefitsCalculationsAPIRespObj.object : benefitsCalculationsAPIRespObj.object;
+    } else {
+        session.privacy.isBenefitsApiCallSuccessful = false;
+    }
+    Logger.debug('benefits Calculations API API {0}', JSON.stringify(benefitsCalculationsAPIRespObj));
+
+    var Transaction = require('dw/system/Transaction');
+    session.privacy.benefitAppliedToCart = false;
+    if (benefitsCalculationsAPIRespObj && 'calculationDetails' in benefitsCalculationsAPIRespObj && benefitsCalculationsAPIRespObj.calculationDetails && benefitsCalculationsAPIRespObj.calculationDetails.length > 0) {
+        if (benefitsCalculationsAPIRespObj && 'planBenefit' in benefitsCalculationsAPIRespObj && benefitsCalculationsAPIRespObj.planBenefit > 0) {
+            session.privacy.benefitAppliedToCart = true;
         }
+        for (var z = 0, z1 = benefitsCalculationsAPIRespObj.calculationDetails.length; z < z1; z++) {
+            var benefitProd = benefitsCalculationsAPIRespObj.calculationDetails[z];
+            var getVariants = ProductMgr.getProduct(benefitProd.productId).variants;
+            for (var k = 0, k1 = getVariants.length; k < k1; k++) {
+                var vID = getVariants[k].ID;
+                if (currentBasket && currentBasket.getProductLineItems(vID).length > 0) {
+                    Transaction.wrap(function () {
+                        currentBasket.getProductLineItems(vID)[0].createPriceAdjustment('benefitCalc', new dw.campaign.AmountDiscount(100));
+                    });
+                    break;
+                };
+
+            }
+        }
+    }
+
+    return benefitsCalculationsAPIRespObj;
+};
+
+base.benefitsCalculationsAPIForPLI = function benefitsCalculationsAPIForPLI(item) {
+    var benefitsCalculationsAPI = require('*/cartridge/scripts/services/BenefitsCalculationsAPI');
+    var Logger = require('dw/system/Logger');
+    var benefitCalculationAPPID = session.privacy.opportunityId;
+    var products = [];
+    var benefitsCalculationsAPIRequestObj = {};
+    var ProductMgr = require('dw/catalog/ProductMgr');
+    var product = ProductMgr.getProduct(item.productID);
+    products.push({
+        productId: product && !product.isMaster() && product.isVariant() ? product.getMasterProduct().ID : product.ID,
+        quantity: item.quantityValue
     });
+    benefitsCalculationsAPIRequestObj.oppId = benefitCalculationAPPID;
+    benefitsCalculationsAPIRequestObj.products = products;
+    var benefitsCalculationsAPIRespObj = benefitsCalculationsAPI.call(benefitsCalculationsAPIRequestObj, false);
+    if (benefitsCalculationsAPIRespObj.error === 401) {
+        benefitsCalculationsAPIRespObj = benefitsCalculationsAPI.call(benefitsCalculationsAPIRequestObj, true);
+    }
+    if (benefitsCalculationsAPIRespObj.status === 'OK') {
+        benefitsCalculationsAPIRespObj = benefitsCalculationsAPIRespObj.object.calculationDetails ? benefitsCalculationsAPIRespObj.object.calculationDetails : benefitsCalculationsAPIRespObj.object;
+    }
+    Logger.debug('benefits Calculations API API {0}', JSON.stringify(benefitsCalculationsAPIRespObj));
+
+    var Transaction = require('dw/system/Transaction');
+    for (var z = 0, z1 = benefitsCalculationsAPIRespObj.length; z < z1; z++) {
+        var benefitProd = benefitsCalculationsAPIRespObj[z];
+        Transaction.wrap(function () {
+            item.createPriceAdjustment('benefitCalc', new dw.campaign.AmountDiscount(benefitProd.productOOPAmount));
+        });
+        break;
+    }
+    return;
 };
 
 module.exports = base;

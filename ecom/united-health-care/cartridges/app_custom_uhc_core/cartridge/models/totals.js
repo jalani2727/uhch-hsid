@@ -110,6 +110,15 @@ function getProductLevelDiscounts(lineItemContainer) {
 }
 
 /**
+ * Accepts a total object and formats the value
+ * @param {dw.value.Money} total - Total price of the cart
+ * @returns {string} the formatted money value
+ */
+function getTotals(total) {
+    return !total.available ? '-' : formatMoney(total);
+}
+
+/**
  * @constructor
  * @classdesc totals class that represents the order totals of the current line item container
  *
@@ -121,5 +130,6 @@ module.exports = function totals(lineItemContainer) {
         this.discounts = getDiscounts(lineItemContainer);
         this.discountsHtml = getDiscountsHtml(this.discounts);
         this.productLevelDiscounts = getProductLevelDiscounts(lineItemContainer);
+        this.subTotal = getTotals(lineItemContainer.merchandizeTotalPrice);
     }
 };

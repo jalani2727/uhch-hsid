@@ -26,6 +26,13 @@ var currentDate = new Date();
 var year = currentDate.getFullYear();
 base.filters = [
     {
+        displayValue: 'All',
+        optionValue: URLUtils.https('Order-Filtered', 'filterUnit', 'all').abs().toString(),
+        units: filterUnits.years,
+        filterName: 'all',
+        multiplier: 0
+    },
+    {
         displayValue: Resource.msg('filter.order.history.30days', 'account', null),
         optionValue: URLUtils.https('Order-Filtered', 'filterUnit', 'days', 'filterValue', 30).abs().toString(),
         units: filterUnits.days,

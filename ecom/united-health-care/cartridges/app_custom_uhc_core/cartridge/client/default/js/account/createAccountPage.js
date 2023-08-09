@@ -12,8 +12,10 @@ var $allInsuranceInputs = $('#other-health-plan, #health-plan-name, #member-id')
 var dateToday = new Date();
 var maxDateAllowedAsDob = new Date();
 maxDateAllowedAsDob.setFullYear(maxDateAllowedAsDob.getFullYear() - 13);
+var minDateAllowedAsDob = new Date('1900-01-01T00:00:00');
 var maxDobAllowedErrorMsg = $('.create-account-page').attr('data-max-dob-allowed-error-msg');
 var futureDateErrorMsg = $('.create-account-page').attr('data-future-dob-error-msg');
+var invalidDateErroMsg = $('.create-account-page').attr('data-invalid-dob-date');
 
 /**
  * onBlurEvents
@@ -87,16 +89,20 @@ function onBlurEvents() {
         var selectedDobValueFormatted = new Date(dobValue);
         var isDobInvalid = selectedDobValueFormatted > maxDateAllowedAsDob && selectedDobValueFormatted <= dateToday;
         var isFutureDobSelected = selectedDobValueFormatted > dateToday;
+        var inValidDate = selectedDobValueFormatted < minDateAllowedAsDob;
 
         if (dobValue !== '') {
             $(this).removeClass('is-invalid');
         }
-        if (dobValue !== '' && (isDobInvalid || isFutureDobSelected)) {
+        if (dobValue !== '' && (inValidDate || isDobInvalid || isFutureDobSelected)) {
             this.setCustomValidity('');
             var validationMessage = this.validationMessage;
             $(this).addClass('is-invalid-input');
             if ($(this).data('range-error')) {
                 validationMessage = isDobInvalid ? maxDobAllowedErrorMsg : futureDateErrorMsg;
+            }
+            if (inValidDate) {
+                validationMessage = invalidDateErroMsg;
             }
             $(this).parents('.form-group').find('.invalid-input')[0].style.display = 'inline-block';
             $(this).parents('.form-group').find('.invalid-input').text(validationMessage);

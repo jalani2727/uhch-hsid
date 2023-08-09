@@ -363,7 +363,7 @@ var datalayerHelper = require('adobeDatalayer/datalayer');
                             }
                         }
                     }
-                    // disable the next:Place Order button here
+                     // disable the next:Place Order button here
                     $('body').trigger('checkout:disableButton', '.next-step-button button');
 
                     $.ajax({
@@ -371,7 +371,7 @@ var datalayerHelper = require('adobeDatalayer/datalayer');
                         method: 'POST',
                         data: paymentForm,
                         success: function (data) {
-                            // enable the next:Place Order button here
+                             // enable the next:Place Order button here
                             $('body').trigger('checkout:enableButton', '.next-step-button button');
                             // look for field validation errors
                             if (data.error) {
@@ -708,9 +708,14 @@ var exports = {
         $('body').on('checkout:enableButton', function (e, button) {
             $(button).prop('disabled', false);
         });
+    },
+
+    submitPage: function () {
+        $('body').on('click', '.button-refresh', function () {
+            var url = $(this).data('zaction');
+            window.location.href = url;
+        });
     }
-
-
 };
 
 [customerHelpers, billingHelpers, shippingHelpers, addressHelpers].forEach(function (library) {

@@ -81,7 +81,7 @@ function fillDomElement(einsteinResponse, $parentElement) {
     }
 }
 
-/**
+ /**
  * Processes a recommendation tile, with an already initialized category specific anchors array
  * @param {jQuery} $parentElement parent element where recommendations will show.
  * @param {Object} einsteinUtils cquotient object

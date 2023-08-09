@@ -58,26 +58,17 @@ function Handle(basket, paymentInformation, paymentMethodID, req) {
  * @param {Object} transactionDetails - transactionDetails
  * @return {Object} returns an error object
  */
-function Authorize(orderNumber, paymentInstrument, paymentProcessor, transactionDetails) {
+function Authorize(orderNumber, paymentInstrument, paymentProcessor, transactionId) {
     var serverErrors = [];
     var fieldErrors = {};
     var error = false;
 
     try {
-        var upgCardType = transactionDetails.cardType.split('C')[0];
-        var availableCardTypes = preferences.upgCreditCardType;
-        var cardType = JSON.parse(availableCardTypes)[upgCardType];
+      
         Transaction.wrap(function () {
-            paymentInstrument.paymentTransaction.setTransactionID(transactionDetails.upgTransactionId);
+            paymentInstrument.paymentTransaction.setTransactionID(transactionId);
             paymentInstrument.paymentTransaction.setPaymentProcessor(paymentProcessor);
             paymentInstrument.paymentTransaction.setType(PaymentTransaction.TYPE_AUTH);
-            // eslint-disable-next-line no-param-reassign
-            paymentInstrument.paymentTransaction.custom.authCode = transactionDetails.upgTransactionId;
-            // eslint-disable-next-line no-param-reassign
-            paymentInstrument.paymentTransaction.custom.providerTransactionId = transactionDetails.providerTransactionId;
-            paymentInstrument.setCreditCardNumber(transactionDetails.accountNumberMasked);
-            paymentInstrument.setCreditCardHolder(transactionDetails.holderName);
-            paymentInstrument.setCreditCardType(cardType);
         });
     } catch (e) {
         error = true;

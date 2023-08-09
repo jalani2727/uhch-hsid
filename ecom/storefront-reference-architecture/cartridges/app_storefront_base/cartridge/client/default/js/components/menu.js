@@ -42,8 +42,8 @@ module.exports = function () {
                     menuItem.removeClass('show').children('.dropdown-menu').removeClass('show');
                     if (!(menuItem.next().length > 0)) { // if this is the last menuItem
                         menuItem.parent().parent().find('li > a') // set focus to the first menuitem
-                            .first()
-                            .focus();
+                        .first()
+                        .focus();
                     } else {
                         menuItem.next().children().first().focus();
                     }

@@ -128,7 +128,7 @@ function initMap() {
         null,
         null,
         new google.maps.Size(64, 64)
-    );
+      );
 
     standardPracticeMarker = new google.maps.MarkerImage(
         providerSearchUtil.getStandardProviderMarkerIconUrl(),
@@ -136,7 +136,7 @@ function initMap() {
         null,
         null,
         new google.maps.Size(64, 64)
-    );
+      );
 
     var enableMarkersClick = mapEl.dataset.customerType === 'registered';
     createMarkers(null, enableMarkersClick);

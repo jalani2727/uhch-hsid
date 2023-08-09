@@ -465,23 +465,16 @@ server.replace(
             pageMetaHelper.setPageMetaData(req.pageMetaData, nameObj['Cart-Show']);
         }
         let viewData = res.getViewData();
-        if (session.privacy.OTCStatus !== '') {
-            cartHelper.checkOTCBenefit();
-            viewData.OTCStatus = session.privacy.OTCStatus;
-            viewData.OTCStatusURL = URLUtils.url('Cart-OTCStatusURL').toString();
-        }
         var currentBasket = BasketMgr.getCurrentBasket();
         var reportingURLs;
-
-        if (currentBasket) {
+        if (currentBasket && currentBasket.productLineItems.length > 0) {
+            viewData.OTCStatusURL = URLUtils.url('Cart-OTCStatusURL').toString();
             Transaction.wrap(function () {
                 if (currentBasket.currencyCode !== req.session.currency.currencyCode) {
                     currentBasket.updateCurrency();
                 }
                 cartHelper.recalculatePriceAdjustments(currentBasket);
-
                 cartHelper.ensureAllShipmentsHaveMethods(currentBasket);
-
                 basketCalculationHelpers.calculateTotals(currentBasket);
             });
         }

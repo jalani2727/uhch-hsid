@@ -1,9 +1,11 @@
 <div class="summary-details payment-summary">
-    <div class="summary-section-label payment-info-label">
-        ${Resource.msg('label.order.details.payment', 'orderDetails', null)}
-    </div>
-    <div class="payment-details">
-        <isprint value="${payment.CardType}"/></br>
-        <isprint value="${payment.DisplayCardNumber}"/></br>
-    </div>
+    <isif condition="${payment.CardType && payment.DisplayCardNumber && payment.CardType !== '' && payment.DisplayCardNumber !== ''}">
+        <div class="summary-section-label payment-info-label">
+            ${Resource.msg('label.order.details.payment', 'orderDetails', null)}
+        </div>
+        <div class="payment-details">
+            <isprint value="${payment.CardType}"/></br>
+            <isprint value="${payment.DisplayCardNumber}"/></br>
+        </div>
+    </isif>
 </div>

@@ -14,13 +14,13 @@ module.exports = {
         $('#hearing-test-file').change(function (e) {
             e.preventDefault();
             util.clearFileUploadLabels();
-            $('.upload-file-error').empty();
+            $('.hearing-test-upload-file').find('.upload-file-error').empty();
             var currentTarget = e.currentTarget;
             if ('files' in currentTarget) {
                 var files = currentTarget.files;
                 var allowedfilelength = parseInt($('input[name=allowed-file-length]').val(), 10) * 1000000;
                 if (files[0].size > allowedfilelength) {
-                    $('.upload-file-error').html('<span class="file-upload-error" style="color:red;">' + fileSizeErrorMsg + parseInt($('input[name=allowed-file-length]').val(), 10) + 'MB. </span>');
+                    $('.hearing-test-upload-file').find('.upload-file-error').text('<span class="file-upload-error" style="color:red;">' + fileSizeErrorMsg + parseInt($('input[name=allowed-file-length]').val(), 10) + 'MB. </span>');
                     return;
                 }
 
@@ -28,7 +28,7 @@ module.exports = {
 
                 // check if upload file format is accepted
                 if (!isValidFileFormat) {
-                    $('.upload-file-error').html('<span class="file-upload-error" style="color:red; font-size:16px;">' + fileFormatErrorMsg + '</span>');
+                    $('.hearing-test-upload-file').find('.upload-file-error').text('<span class="file-upload-error" style="color:red; font-size:16px;">' + fileFormatErrorMsg + '</span>');
                     return;
                 }
                 util.setFile(files[0]);
@@ -45,11 +45,11 @@ module.exports = {
             e.preventDefault();
             var recaptchaEnable = $(this).data('recaptchaenable');
             if (recaptchaEnable) {
-                $('#g-recaptcha-error').html('');
+                $('.captcha-container').find('#g-recaptcha-error').html('');
                 var response = window.grecaptcha.getResponse();
                 if (response.length === 0) {
                     // reCaptcha not verified
-                    $('#g-recaptcha-error').html('<span style="color:red;">' + verifyCaptchaErrorMsg + '</span>');
+                    $('.captcha-container').find('#g-recaptcha-error').text('<span style="color:red;">' + verifyCaptchaErrorMsg + '</span>');
                     return false;
                 }
             }
@@ -76,7 +76,7 @@ module.exports = {
                             if (window.grecaptcha) {
                                 window.grecaptcha.reset();
                             }
-                            $('#g-recaptcha-error').append('<span style="color:red;">' + verifyCaptchaErrorMsg + '</span>');
+                            $('.captcha-container').find('#g-recaptcha-error').text('<span style="color:red;">' + verifyCaptchaErrorMsg + '</span>');
                         } else if (result.error && result.formatError) {
                             $.spinner().stop();
                             util.clearFileUploadLabels();
@@ -105,7 +105,7 @@ module.exports = {
                 });
             } else {
                 util.clearFileUploadLabels();
-                $('.upload-file-error').html('<span class="file-upload-error" style="color:red; font-size:16px;">' + fileFormatErrorMsg + '</span>');
+                $('.hearing-test-upload-file').find('.upload-file-error').text('<span class="file-upload-error" style="color:red; font-size:16px;">' + fileFormatErrorMsg + '</span>');
             }
             return true;
         });

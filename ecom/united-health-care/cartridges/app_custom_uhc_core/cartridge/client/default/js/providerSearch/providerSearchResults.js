@@ -149,7 +149,7 @@ function initializeFilterChangeEvents() {
             var files = currentTarget.files;
             var allowedfilelength = parseInt($('input[name=allowed-file-length]').val(), 10) * 1000000;
             if (files[0] && files[0].size > allowedfilelength) {
-                $('.upload-file-error').html('<span class="file-upload-error" style="color:red;">' + labels.ERROR_MSG.FILE_SIZE_ERROR + parseInt($('input[name=allowed-file-length]').val(), 10) + 'MB.</span>');
+                $('.upload-file-error').text('<span class="file-upload-error" style="color:red;">' + labels.ERROR_MSG.FILE_SIZE_ERROR + parseInt($('input[name=allowed-file-length]').val(), 10) + 'MB.</span>');
                 uploadedFile = document.getElementById('hearing-test-file');
                 uploadedFile.value = null;
                 return;
@@ -159,7 +159,7 @@ function initializeFilterChangeEvents() {
 
             // check if upload file format is accepted
             if (!isValidFileFormat) {
-                $('.upload-file-error').html('<span class="file-upload-error" style="color:red; font-size:16px;">' + fileFormatErrorMsg + '</span>');
+                $('.upload-file-error').text('<span class="file-upload-error" style="color:red; font-size:16px;">' + fileFormatErrorMsg + '</span>');
                 uploadedFile = document.getElementById('hearing-test-file');
                 uploadedFile.value = null;
                 return;
@@ -187,7 +187,7 @@ function initializeViewChangeEvents() {
             var selectedPractice = normalizedPractices.get(practiceId);
 
             var practiceViewHTML = viewsTemplatesUtil.getPracticeViewTemplate(selectedPractice);
-            $viewElements.PRACTICE_VIEW.html(practiceViewHTML);
+            $('.provider-search-content').find($viewElements.PRACTICE_VIEW).html(practiceViewHTML);
             viewSwitcher.switchView(views.PRACTICE_VIEW);
         }
     );
@@ -196,7 +196,7 @@ function initializeViewChangeEvents() {
         'click',
         viewCtaSelectors.GOTO_RESULTS_VIEW,
         function () {
-            $viewElements.PRACTICE_VIEW.html('');
+            $('.provider-search-content').find($viewElements.PRACTICE_VIEW).html('');
             viewSwitcher.switchView(views.RESULTS_VIEW);
         }
     );
@@ -240,7 +240,7 @@ function initializeViewChangeEvents() {
             var selectedProvider = (selectedPractice.providers || [])[providerId];
 
             var providerViewHTML = viewsTemplatesUtil.getProviderViewHTML(selectedProvider, practiceId);
-            $viewElements.PROVIDER_VIEW.html(providerViewHTML);
+            $('.provider-search-content').find($viewElements.PROVIDER_VIEW).html(providerViewHTML);
             viewSwitcher.switchView(views.PROVIDER_VIEW);
         }
     );
@@ -253,7 +253,7 @@ function initializeViewChangeEvents() {
             var selectedPractice = normalizedPractices.get(practiceId);
 
             var practiceViewHTML = viewsTemplatesUtil.getPracticeViewTemplate(selectedPractice);
-            $viewElements.PRACTICE_VIEW.html(practiceViewHTML);
+            $('.provider-search-content').find($viewElements.PRACTICE_VIEW).html(practiceViewHTML);
             viewSwitcher.switchView(views.PRACTICE_VIEW);
         }
     );

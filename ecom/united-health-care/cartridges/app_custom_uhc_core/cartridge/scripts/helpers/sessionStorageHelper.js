@@ -8,11 +8,11 @@ function setCustomerdetailInSessionLogin(responseObj) {
     if (responseObj.dob && responseObj.dob !== null) {
         session.privacy.profilebirthdate = new Date(responseObj.dob);
     }
-    if (responseObj.AARP_Subscriber_ID && responseObj.AARP_Subscriber_ID !== null) {
-        session.privacy.AARPSubscriberId = responseObj.AARP_Subscriber_ID;
+    if (responseObj.AARP_Subscriber_ID || responseObj.AARP_Subscriber_ID == null || responseObj.AARP_Subscriber_ID === '') {
+        session.privacy.AARPSubscriberId = responseObj.AARP_Subscriber_ID || '';
     }
-    if (responseObj.subscriber_id && responseObj.subscriber_id !== null) {
-        session.privacy.subscriberId = responseObj.subscriber_id;
+    if (responseObj.subscriber_id || responseObj.subscriber_id == null || responseObj.subscriber_id === '') {
+        session.privacy.subscriberId = responseObj.subscriber_id || '';
     }
     if (responseObj.AARP_Member && responseObj.AARP_Member !== null) {
         session.privacy.AARP_Member = responseObj.AARP_Member;
@@ -35,6 +35,12 @@ function setCustomerdetailInSessionLogin(responseObj) {
     if (responseObj.OTCBenefitRemaining && responseObj.OTCBenefitRemaining !== null) {
         session.privacy.OTCBenefitRemaining = responseObj.OTCBenefitRemaining;
     }
+    if (responseObj.healthPlanName && responseObj.healthPlanName !== null) {
+        session.privacy.healthPlanName = responseObj.healthPlanName;
+    }
+    if (responseObj.NewPurchasePossible && responseObj.NewPurchasePossible !== null) {
+        session.privacy.NewPurchasePossible = responseObj.NewPurchasePossible;
+    }
 }
 
 /**
@@ -44,7 +50,7 @@ function setCustomerdetailInSessionLogin(responseObj) {
 function setCustomerType(req) {
     if (session.privacy.subscriberId !== null && session.privacy.opportunityId && session.privacy.opportunityId !== null && session.privacy.pricebook != null) {
         req.session.privacyCache.set('customerType', 'UHCVerified');
-    } else if (session.privacy.subscriberId !== null) {
+    } else if (session.privacy.subscriberId !== null && session.privacy.subscriberId !== '') {
         req.session.privacyCache.set('customerType', 'UHCNotVerified');
     } else {
         req.session.privacyCache.set('customerType', 'UHCNoData');

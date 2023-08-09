@@ -79,12 +79,12 @@
                         <div class="radio-container mt-4 mb-3">
                             <div class="form-group custom-control custom-radio">
                                 <input class="custom-control-input" type="radio" id="paperless-communication" name="communicationPreference"
-                                    value="paperless" />
+                                    value="Email" ${pdict.communicationPreference === 'Email' ? 'checked' : ''} />
                                 <label class="custom-control-label" for="paperless-communication">${Resource.msg('label.communitcation.paperless', 'editprofile', null)}</label>
                             </div>
                             <div class="form-group custom-control custom-radio">
                                 <input class="custom-control-input" type="radio" id="email-communication" name="communicationPreference"
-                                    value="mail" checked/>
+                                    value="Postal Mail" ${pdict.communicationPreference === 'Postal Mail' ? 'checked' : ''} />
                                 <label class="custom-control-label" for="email-communication">${Resource.msg('label.communitcation.mail', 'editprofile', null)}</label>
                             </div>
                         </div>

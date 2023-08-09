@@ -18,24 +18,31 @@
             <iscomment> Form </iscomment>
             <div class="card edit-profile-card" data-communication-preference="${pdict.communicationPreference}">
                 <div class="card-body pt-0">
-                    <form action="${pdict.actionURL}" class="edit-profile-details-form" method="POST" name="edit-profile-details-form" enctype="multipart/form-data">
+                    <form action="${pdict.actionURL}" class="edit-profile-details-form" method="POST"
+                        name="edit-profile-details-form" enctype="multipart/form-data">
                         <iscomment> Edit profile uneditable section </iscomment>
                         <div class="non-editable-section">
                             <iscomment> User's First Name </iscomment>
-                            <dl class="${pdict.userFirstName !== 'undefined' && pdict.userFirstName!== 'null' && pdict.userFirstName !== '' ? '' : 'd-none'}">
-                                <dt class="custom-form-label">${Resource.msg('label.edit-profile.first-name','editprofile',null)}</dt>
+                            <dl
+                                class="${pdict.userFirstName !== 'undefined' && pdict.userFirstName !== 'null' && pdict.userFirstName !== '' ? '' : 'd-none'}">
+                                <dt class="custom-form-label">
+                                    ${Resource.msg('label.edit-profile.first-name', 'editprofile', null)}</dt>
                                 <dd>${pdict.userFirstName}</dd>
                             </dl>
 
                             <iscomment> User's Last Name </iscomment>
-                            <dl class="${pdict.userLastName !== 'undefined' && pdict.userLastName!== 'null' && pdict.userLastName !== '' ? '' : 'd-none'}">
-                                <dt class="custom-form-label">${Resource.msg('label.edit-profile.last-name','editprofile',null)}</dt>
+                            <dl
+                                class="${pdict.userLastName !== 'undefined' && pdict.userLastName !== 'null' && pdict.userLastName !== '' ? '' : 'd-none'}">
+                                <dt class="custom-form-label">
+                                    ${Resource.msg('label.edit-profile.last-name', 'editprofile', null)}</dt>
                                 <dd>${pdict.userLastName}</dd>
                             </dl>
 
                             <iscomment> User's Email </iscomment>
-                            <dl class="${pdict.email !== 'undefined' && pdict.email!== 'null' && pdict.email !== '' ? '' : 'd-none'}">
-                                <dt class="custom-form-label">${Resource.msg('label.edit-profile.email','editprofile',null)}</dt>
+                            <dl
+                                class="${pdict.email !== 'undefined' && pdict.email !== 'null' && pdict.email !== '' ? '' : 'd-none'}">
+                                <dt class="custom-form-label">
+                                    ${Resource.msg('label.edit-profile.email', 'editprofile', null)}</dt>
                                 <dd>${pdict.email}</dd>
                             </dl>
                         </div>
@@ -48,8 +55,8 @@
                                 </label>
                                 <input type="text"
                                     placeholder="${Resource.msg('label.form.field.phone.placeholder', 'forms', null)}"
-                                    required class="form-control required input-phone" id="user-phone"
-                                    maxlength="12" pattern="(^\d{3}-\d{3}-\d{4}$)"
+                                    required class="form-control required input-phone" id="user-phone" maxlength="12"
+                                    pattern="(^\d{3}-\d{3}-\d{4}$)"
                                     data-pattern-mismatch="${Resource.msg('error.message.invalid-phone', 'editprofile', null)}"
                                     name="userPhone" value="${pdict.phone && pdict.phone !== '' ? pdict.phone : ''}">
                                 <div class="invalid-feedback" id="user-phone-error"></div>
@@ -58,27 +65,59 @@
 
                         <iscomment> ZipCode </iscomment>
                         <div class="col px-0">
-                            <div class="form-group required user-phone-container">
+                            <div class="form-group required zipcode-phone-container">
                                 <label class="custom-form-control-label" for="user-phone">
                                     ${Resource.msg('label.edit-profile.zip', 'editprofile', null)}
                                 </label>
-                                <input type="text"
-                                    required class="form-control required" id="user-zip" name="userZip"
+                                <input type="text" required class="form-control required" id="user-zip" name="userZip"
                                     maxlength="10" minlength="5"
-                                    pattern="(^\d{5}(-\d{4})?$)|(^[abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$)" 
+                                    pattern="(^\d{5}(-\d{4})?$)|(^[abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$)"
                                     data-pattern-mismatch="${Resource.msg('error.message.invalid-zipcode', 'createaccount', null)}"
                                     value="${pdict.zipCode && pdict.zipCode !== '' ? pdict.zipCode : ''}">
                                 <div class="invalid-feedback" id="user-phone-error"></div>
                             </div>
                         </div>
 
+                        <iscomment> Health Plan Name </iscomment>
+                        <div class="col px-0">
+                            <div class="form-group user-health-plan-name-container">
+                                <label for="health-plan-name" class="custom-form-control-label-opt">
+                                    ${Resource.msg('form.input.label.health-plan-name', 'editprofile', null)}
+                                </label>
+                                <input type="text" class="form-control" id="health-plan-name" name="healthplanName"
+                                    value="${pdict.healthPlanName && pdict.healthPlanName !== '' ? pdict.healthPlanName : ''}">
+                                <div class="invalid-feedback" id="health-plan-name-error"></div>
+                            </div>
+                        </div>
+
+                        <iscomment> Member Id </iscomment>
+                        <div class="col px-0">
+                            <div class="form-group member-id-container">
+                                <label for="member-id" class="custom-form-control-label-opt">
+                                    ${Resource.msg('form.input.label.member-id', 'editprofile', null)}
+                                    <div class="member-id-info-card">
+                                        <div class="member-id-info-card-icon"></div>
+                                        <div class="member-id-info-card-img">
+                                            <iscontentasset aid="healthplan-memberid-info-tooltip" />
+                                        </div>
+                                    </div>
+                                </label>
+                                <input type="text" class="form-control" id="member-id" name="memberId"
+                                    value="${pdict.memberId && pdict.memberId !== '' ? pdict.memberId : ''}">
+                                <div class="invalid-feedback" id="member-id-error"></div>
+                            </div>
+                        </div>
+
                         <iscomment> AARP Membership Number </iscomment>
-                        <div class="form-group mb-0">
-                            <label for="aarp-membership-number" class="custom-form-label">
-                                ${Resource.msg('form.input.label.membership-number', 'editprofile', null)}
-                            </label>
-                            <input type="text" class="form-control" id="aarp-membership-number" name="memberId" value="${pdict.memberId && pdict.memberId !== '' ? pdict.memberId : ''}">
-                            <div class="invalid-feedback" id="aarp-membership-error"></div>
+                        <div class="col px-0">
+                            <div class="form-group membership-number-container">
+                                <label for="aarp-membership-number" class="custom-form-control-label-opt">
+                                    ${Resource.msg('form.input.label.membership-number', 'editprofile', null)}
+                                </label>
+                                <input type="text" class="form-control" id="aarp-membership-number" name="aarpmemberId"
+                                    value="${pdict.aarpSubscriberID && pdict.aarpSubscriberID !== '' ? pdict.aarpSubscriberID : ''}">
+                                <div class="invalid-feedback" id="aarp-membership-error"></div>
+                            </div>
                         </div>
 
                         <iscomment> Communication Setting details </iscomment>
@@ -87,26 +126,32 @@
                         <iscomment> Communication Setting </iscomment>
                         <div class="radio-container mt-4 mb-3">
                             <div class="form-group custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" id="paperless-communication" name="communicationPreference"
-                                    value="paperless" />
-                                <label class="custom-control-label" for="paperless-communication">${Resource.msg('label.communitcation.paperless', 'editprofile', null)}</label>
+                                <input class="custom-control-input" type="radio" id="paperless-communication"
+                                    name="communicationPreference" value="Email"
+                                    ${pdict.communicationPreference === 'Email' ? 'checked' : ''} />
+                                <label class="custom-control-label"
+                                    for="paperless-communication">${Resource.msg('label.communitcation.paperless', 'editprofile', null)}</label>
                             </div>
                             <div class="form-group custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" id="email-communication" name="communicationPreference"
-                                    value="mail" checked/>
-                                <label class="custom-control-label" for="email-communication">${Resource.msg('label.communitcation.mail', 'editprofile', null)}</label>
+                                <input class="custom-control-input" type="radio" id="email-communication"
+                                    name="communicationPreference" value="Postal Mail"
+                                    ${pdict.communicationPreference === 'Postal Mail' ? 'checked' : ''} />
+                                <label class="custom-control-label"
+                                    for="email-communication">${Resource.msg('label.communitcation.mail', 'editprofile', null)}</label>
                             </div>
                         </div>
-                        
+
                         <iscomment> Button container </iscomment>
                         <div class="row edit-profile-btn-container mt-2">
                             <div class="col-lg-6 col-md-12 col-sm-12">
-                                <button class="btn btn-primary w-100 btn-save-details" type="submit" name="submit" value="submit">
+                                <button class="btn btn-primary w-100 btn-save-details" type="submit" name="submit"
+                                    value="submit">
                                     ${Resource.msg('label.btn.save', 'editprofile', null)}
                                 </button>
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12">
-                                <a href="${URLUtils.url('Account-Show')}" class="btn btn-outline-primary w-100 btn-cancel">
+                                <a href="${URLUtils.url('Account-Show')}"
+                                    class="btn btn-outline-primary w-100 btn-cancel">
                                     ${Resource.msg('label.btn.cancel', 'editprofile', null)}
                                 </a>
                             </div>
@@ -118,7 +163,8 @@
             <iscomment> Link to Account </iscomment>
             <div class="row">
                 <div class="col text-center">
-                    <a href="${URLUtils.url('Account-Show')}" class="profile-back-to-account-link">${Resource.msg('link.profile.back-to-my-account','editprofile',null)}</a>
+                    <a href="${URLUtils.url('Account-Show')}"
+                        class="profile-back-to-account-link">${Resource.msg('link.profile.back-to-my-account', 'editprofile', null)}</a>
                 </div>
             </div>
         </div>

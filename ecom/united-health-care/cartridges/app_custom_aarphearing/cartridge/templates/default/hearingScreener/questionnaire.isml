@@ -1,0 +1,23 @@
+<div class="hearing-screener-container container">
+    <div class="container">
+        <h2>${Resource.msg('label.hearing-screener.header','hearingscreener',null)}</h2>
+    </div>
+
+<!-- Begin: Screener Progress Bar-->
+    <div class="hearing-screener-header">
+        <div class="hearing-screener-progress-bar q1-unfilled container"></div>
+    </div>
+<!-- End: Screener Progress Bar-->
+
+<!-- Begin: Screener Body-->
+    <div class="hearing-screener-body">
+        <div class="hearing-screener-content">
+            <form id="hearingScreenerForm" class="hearing-screener-form" action="" method="POST" name="hearing-screener-form">
+                <div class="screener-form-container">
+                    <isinclude template="hearingScreener/screenerContent.isml" />
+                </div>
+            </form>
+        </div>
+    </div>
+<!-- End: Screener Body-->
+</div>

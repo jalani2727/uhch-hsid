@@ -3,7 +3,7 @@
 var base = module.superModule;
 
 var cartHelper = require('*/cartridge/scripts/cart/cartHelpers');
-var Resource = require('dw/web/Resource');
+var Resource = require('dw/web/Resource');    
 
 /**
  * @constructor
@@ -29,6 +29,10 @@ function CartModel(basket) {
             message = Resource.msg('msg.cart.qtyerror.otc', 'cart', null);
             this.cartErrorMessages.push(message);
         }
+        if (session.privacy.OTCDevicesCoverage === 'Yes' && session.privacy.NewPurchasePossible === 'Yes') {
+            this.benefits = cartHelper.benefitsCalculationsAPI(this.items);
+        }
+        this.benefits = cartHelper.benefitsCalculationsAPI(this.items);
     } else {
         this.items = [];
         this.numItems = 0;

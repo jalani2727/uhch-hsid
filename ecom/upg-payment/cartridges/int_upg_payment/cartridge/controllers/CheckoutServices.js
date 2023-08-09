@@ -23,30 +23,27 @@ server.replace('PlaceOrder', server.middleware.https, function (req, res, next) 
     var crypto = require('*/cartridge/scripts/helpers/crypto');
     var orderSuccess = true;
     var urlredirect = URLUtils.url('Cart-Show').toString();
+    var order;
 
-    var encryptedOrderNumber = crypto.decrypt(req.querystring.orderNo);
-    var splitOrderNumber = encryptedOrderNumber.split('|');
-    var orderNumber = splitOrderNumber[0];
-    var orderToken = splitOrderNumber[1];
+    if ('zeroOrder' in req.querystring && req.querystring.zeroOrder === 'true') {
+        order = OrderMgr.getOrder(req.querystring.orderNo);
+    } else {
+        var encryptedOrderNumber = crypto.decrypt(req.querystring.orderNo);
+        var splitOrderNumber = encryptedOrderNumber.split('|');
+        var orderNumber = splitOrderNumber[0];
+        var orderToken = splitOrderNumber[1];
 
-    var order = OrderMgr.getOrder(orderNumber, orderToken);
+        order = OrderMgr.getOrder(orderNumber, orderToken);
 
-    // Handles payment authorization
-    var transactionDetail = upgServiceHelper.getFindService(transactionId);
-    COHelpers.addOrderNotes(order, transactionDetail);
-    if (empty(order.custom.appID)) {
-        COHelpers.updateCustomerDataToOrder(order);
-    }
-
-    if (transactionDetail.error) {
-        Transaction.wrap(function () { OrderMgr.failOrder(order, true); });
-        orderSuccess = false;
-    }
-
-    var handlePaymentResult = COHelpers.handlePayments(order, order.orderNo, transactionDetail);
-    if (handlePaymentResult.error) {
-        Transaction.wrap(function () { OrderMgr.failOrder(order, true); });
-        orderSuccess = false;
+        // Handles payment authorization
+        if (empty(order.custom.appID)) {
+            COHelpers.updateCustomerDataToOrder(order);
+        }
+        var handlePaymentResult = COHelpers.handlePayments(order, order.orderNo, transactionId);
+        if (handlePaymentResult.error) {
+            Transaction.wrap(function () { OrderMgr.failOrder(order, true); });
+            orderSuccess = false;
+        }
     }
 
     // Places the order

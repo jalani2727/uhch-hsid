@@ -20,7 +20,7 @@ server.get('HandleSuccess', server.middleware.https, function (req, res, next) {
     var Calendar = require('dw/util/Calendar');
     var URLUtils = require('dw/web/URLUtils');
     var paymentPortalHelper = require('*/cartridge/scripts/helpers/paymentPortalHelper');
-    var Logger = require('dw/system/Logger');
+    var Logger = require('dw/system/Logger').getLogger('UPGPaymentFlowError', 'UPGPaymentFlowError');
     var urlRedirect = '';
 
     var invoiceData = {};
@@ -61,7 +61,7 @@ server.get('HandleSuccess', server.middleware.https, function (req, res, next) {
         var transactionDate = Date(transactionDetails.transactionDate);
         invoiceData.formattedTransactionDate = StringUtils.formatCalendar(new Calendar(new Date(transactionDate)), 'MM/dd/yyyy');
         invoiceData.transactionDate = StringUtils.formatCalendar(new Calendar(new Date(transactionDate)), 'yyyy-MM-dd');
-
+        Logger.error('Generating Collection Record for invoice id: ' + invoiceData.invoiceRecordId + ' and transaction id ' + invoiceData.opportunityId);
         var collectionRecordResponseArr = paymentPortalHelper.createCollectionRecord(invoiceData);
 
         var collectionRecordCreated = true;

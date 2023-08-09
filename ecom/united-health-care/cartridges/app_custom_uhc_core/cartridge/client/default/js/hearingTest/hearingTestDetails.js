@@ -40,18 +40,18 @@ function frameUpdate() {
                 success: function (data) {
                     if (data.methodType === 'get') {
                         var redirect = $('<form>')
-                            .appendTo(document.body)
-                            .attr({
-                                method: 'POST',
-                                action: data.redirectUrl
-                            });
+                        .appendTo(document.body)
+                        .attr({
+                            method: 'POST',
+                            action: data.redirectUrl
+                        });
                         if (data.csrfToken) {
                             $('<input>')
-                                .appendTo(redirect)
-                                .attr({
-                                    name: 'csrf_token',
-                                    value: data.csrfToken
-                                });
+                            .appendTo(redirect)
+                            .attr({
+                                name: 'csrf_token',
+                                value: data.csrfToken
+                            });
                         }
                         redirect.submit();
                     } else {

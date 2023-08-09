@@ -13,14 +13,11 @@
     </isif>
 </head>
 
-<body>
-    <iscomment>
-        <isinclude template="/components/header/logoOnlyPageHeader" />
-    </iscomment>
-    <div role="main" id="maincontent">
-        <isreplace/>
-    </div>
-    <isinclude template="/components/footer/messageOnlyPageFooter" />
-</body>
-
+    <body>
+        <iscomment> <isinclude template="/components/header/logoOnlyPageHeader" /> </iscomment>
+        <div role="main" id="maincontent">
+            <isreplace/>
+        </div>
+        <isinclude template="/components/footer/messageOnlyPageFooter" />
+    </body>
 </html>

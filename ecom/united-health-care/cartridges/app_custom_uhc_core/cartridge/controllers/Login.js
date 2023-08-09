@@ -155,9 +155,17 @@ server.replace('OAuthReentry', server.middleware.https, consentTracking.consent,
 
         if (oauthProviderID === 'HSID') {
             var essoHsid = require('*/cartridge/scripts/services/essoHsid.js');
-            var essoResponse = essoHsid.queryMember(externalProfile.username);
+            var essoResponse = essoHsid.queryMember(externalProfile.username, false);
+            var essoResponseObject;
+            if (essoResponse.error === 401) {
+                essoResponse = essoHsid.queryMember(externalProfile.username, true);
+            }
             if (essoResponse.status === 'OK') {
-                var essoResponseObject = JSON.parse(essoResponse.object.text);
+                essoResponseObject = JSON.parse(essoResponse.object.text);
+                email = essoResponseObject.Resources.Resource[0].UserPayload.emails[0].value;
+            } else {
+                essoResponse = essoHsid.queryMember(externalProfile.username, true);
+                essoResponseObject = JSON.parse(essoResponse.object.text);
                 email = essoResponseObject.Resources.Resource[0].UserPayload.emails[0].value;
             }
         } else {
@@ -192,6 +200,7 @@ server.replace('OAuthReentry', server.middleware.https, consentTracking.consent,
         var accountFound;
         // call requestResource as 'login' for EASE API - oauthtarget
         if (authenticatedCustomerProfile) {
+            session.privacy.hsIdUUID = userID || '';
             memberDetails.email = email;
             memberDetails.requestSource = 'login';
             responseObj = eligibilityHelper.getCustomerDetails(memberDetails);
@@ -210,10 +219,13 @@ server.replace('OAuthReentry', server.middleware.https, consentTracking.consent,
                 var preferences = require('*/cartridge/config/preferences.js');
                 if (preferences.enableOrderCustomerUpdate) {
                     var utilHelpers = require('*/cartridge/scripts/helpers/utilHelpers');
-                    utilHelpers.setOrderCustomer(newCustomer);
-                    Transaction.wrap(function () {
-                        authenticatedCustomerProfile.custom.linkedLegacyOrders = true;
-                    });
+                    var ordersLinked = utilHelpers.setOrderCustomer(newCustomer);
+                    if (ordersLinked) {
+                        Transaction.wrap(function () {
+                            authenticatedCustomerProfile.custom.linkedLegacyOrders = true;
+                        });
+                        Logger.info('orders linked for customer ' + customer.profile.customerNo + ' ' + customer.profile.email);
+                    }
                 }
             });
             // get member details if exists on ease side
@@ -233,10 +245,9 @@ server.replace('OAuthReentry', server.middleware.https, consentTracking.consent,
             return next();
         }
         // account found - set HSID and other benefit info in session privacy
-        if (accountFound && session.privacy.customerDetails) {
-            session.privacy.hsIdUUID = userID;
+        if (accountFound) {
+            session.privacy.hsIdUUID = userID || '';
         }
-
         if (responseObj && responseObj != null) {
             // updating the customer data received from EASE API
             Transaction.wrap(function () {
@@ -253,6 +264,11 @@ server.replace('OAuthReentry', server.middleware.https, consentTracking.consent,
             var sessionStorageHelper = require('*/cartridge/scripts/helpers/sessionStorageHelper');
             sessionStorageHelper.setCustomerdetailInSessionLogin(responseObj);
             sessionStorageHelper.setCustomerType(req);
+        }
+        if (authenticatedCustomerProfile && !authenticatedCustomerProfile.custom.sfdcContactID) {
+            var logout = URLUtils.url('Login-Logout').toString() + '/';
+            res.redirect(logout);
+            return next();
         }
         // code for staging Home-show Redirect issue
         var curSite = Site.getCurrent();
@@ -437,8 +453,11 @@ server.post(
         }
         if (noInsurance !== 'on') {
             session.privacy.subscriberId = req.form.memberId || '';
-            externalProfile.healthPlanName = req.form.healthPlanName ? req.form.healthPlanName : req.form.otherHealthPlan;
+            externalProfile.noInsurance = false;
             externalProfile.healthPlanName = req.form.otherHealthPlan ? req.form.otherHealthPlan : req.form.healthPlanName;
+        } else {
+            externalProfile.noInsurance = true;
+            externalProfile.healthPlanName = '';
         }
         externalProfile.subscriberId = req.form.memberId || '';
         // eslint-disable-next-line no-undef, space-infix-ops
@@ -453,9 +472,9 @@ server.post(
                     profile.setLastName(responseObj.lastName ? responseObj.lastName : req.form.userLastName);
                     profile.setPhoneHome(responseObj.home_phone ? responseObj.home_phone : req.form.userPhone);
                     profile.custom.sfdcContactID = responseObj.sfdcContactId ? responseObj.sfdcContactId : '';
+                    profile.custom.zipCode = responseObj.ZipCode ? responseObj.ZipCode : '';
                 });
             }
-            eligibilityHelper.displayRegistrationModel();
         }
         if (session.privacy.pricebook && session.privacy.pricebook !== null) {
             // updating the pricebook if it is avaiable in the session
@@ -465,6 +484,7 @@ server.post(
         var sessionStorageHelper = require('*/cartridge/scripts/helpers/sessionStorageHelper');
         sessionStorageHelper.setCustomerdetailInSessionLogin(responseObj);
         sessionStorageHelper.setCustomerType(req);
+        eligibilityHelper.displayRegistrationModel();
         var curSite = Site.getCurrent();
         var redirect = curSite.getCustomPreferenceValue('isHostURL');
         var url = redirect ? 'https://' + request.httpHost : URLUtils.url('Home-Show') + '/';

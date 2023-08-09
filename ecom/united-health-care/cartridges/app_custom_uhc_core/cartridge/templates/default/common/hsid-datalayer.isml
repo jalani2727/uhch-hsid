@@ -1,7 +1,7 @@
 <!-- Datalayer Object -->
 <script type="text/javascript">
     var adobeDataLayer = [];
-    var isAdobeDatalayer = '${pdict.adobeDataLayer ? true : false}';
+    var isAdobeDatalayer = 'true';
     var buildContentViewURL = '${URLUtils.https('Build-BuildContentView').toString()}';
     var datalayerContext = 'GlobalData';
     var datalayerPageGroup = 'Create Account';

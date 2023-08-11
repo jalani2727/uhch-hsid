@@ -228,6 +228,14 @@ $desktop-large: 1667px;
         top: 35px;
         right: 3%;
         max-width: 45%;
+        
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        .user-consent-container {
+            font-size: 14px;
+        }
     }
 
     @media (min-width: $desktop-small) {

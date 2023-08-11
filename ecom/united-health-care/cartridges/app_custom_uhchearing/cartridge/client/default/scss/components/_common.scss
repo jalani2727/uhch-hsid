@@ -102,6 +102,9 @@ header ~ #maincontent .container a:not(.btn-primary, .btn-outline-primary) {
         font-size: 28px;
         line-height: 44px;
     }
+    @include media-breakpoint-between(md,lg) {
+        font-size: 24px;
+    }
 }
 
 .uhc-sub-title-two {
